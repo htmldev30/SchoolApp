@@ -1,4 +1,4 @@
-# SchoolApp
+# SchoolApp (for FBLA competition)
 Info: I am satisfying the required functionalities for the app while adding my own creative twist. 
 
 Timeline for App Development
