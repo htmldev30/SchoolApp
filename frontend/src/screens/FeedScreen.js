@@ -1,12 +1,8 @@
 import React from 'react'
-import { View, Text } from 'react-native-ui-lib'
+import { Heading, Text, Box, VStack, Center } from 'native-base'
+// Custom Imports
+import { CustomButton } from '../components/customButton'
 
 export const FeedScreen = () => {
-    return (
-        <View flex paddingH-40 paddingT-140>
-            <View marginT-80 center>
-                <Text text70M>Welcome To School App</Text>
-            </View>
-        </View>
-    )
+    return <Box flex="1" m="4" p="2" safeAreaTop></Box>
 }

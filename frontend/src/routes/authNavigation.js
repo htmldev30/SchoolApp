@@ -3,7 +3,9 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 // Screens
 import { LandingScreen } from '../screens/LandingScreen'
-import { LandingScreen2 } from '../screens/LandingScreen2'
+import { ParentAuthStackScreens } from '../routes/stacks/authStacks/parentAuthStack'
+import { StudentAuthStackScreens } from '../routes/stacks/authStacks/studentAuthStack'
+import { FacultyAuthStackScreens } from '../routes/stacks/authStacks/facultyAuthStack'
 
 const AuthTab = createStackNavigator()
 
@@ -15,7 +17,18 @@ export const AuthNavigation = () => {
             })}
         >
             <AuthTab.Screen name="Landing" component={LandingScreen} />
-            <AuthTab.Screen name="Landing2" component={LandingScreen2} />
+            <AuthTab.Screen
+                name="ParentAuth"
+                component={ParentAuthStackScreens}
+            />
+            <AuthTab.Screen
+                name="StudentAuth"
+                component={StudentAuthStackScreens}
+            />
+            <AuthTab.Screen
+                name="FacultyAuth"
+                component={FacultyAuthStackScreens}
+            />
         </AuthTab.Navigator>
     )
 }
