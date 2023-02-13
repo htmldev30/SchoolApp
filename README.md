@@ -8,6 +8,8 @@ Timeline for App Development
 
 **Feb. 12, 2023**
 
+- Context Hook for User Authentication. (JWT AUTH will be used)
+- Axios initial setup for API requests
 - Setup backend with ExpressJS
 - Changed the UI for form fields
 - UI elements now default to specific set styles
