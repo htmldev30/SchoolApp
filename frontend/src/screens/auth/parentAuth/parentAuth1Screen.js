@@ -2,7 +2,7 @@ import React from 'react'
 import { Heading, Text, Box, VStack, Center } from 'native-base'
 import { TouchableWithoutFeedback, Keyboard } from 'react-native'
 // Custom Imports
-import { ParentAuth } from '../../../modules/AuthForms/ParentAuth'
+import { ParentAuth1Form } from '../../../modules/AuthForms/ParentAuth1Form'
 export const ParentAuth1Screen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -13,7 +13,7 @@ export const ParentAuth1Screen = ({ navigation }) => {
                         <Text fontSize="2xl" bold>
                             Sign Up
                         </Text>
-                        <ParentAuth />
+                        <ParentAuth1Form />
                     </Center>
                 </Box>
             </Box>
