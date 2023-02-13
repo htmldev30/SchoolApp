@@ -3,6 +3,13 @@
 Info: I am satisfying the required functionalities for the app while adding my own creative twist.
 
 Timeline for App Development
+---
+
+**Feb. 11, 2023**
+
+- Switched from RNUILib to NativeBase because the latter had easier to read documentation
+- Setup navigation stacks for each user type during the authentication process
+- Setup basic UI for authentication like input fields
 
 ---
 
