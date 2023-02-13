@@ -1,6 +1,5 @@
 import 'react-native-gesture-handler' // As per documentation, goes at very top
 import React from 'react'
-
 // Navigation
 import { NavigationContainer } from '@react-navigation/native'
 import { RootStackScreen } from './src/routes/rootNavigation'
@@ -104,10 +103,28 @@ const customColorTheme = {
 const theme = extendTheme({
     colors: customColorTheme,
     components: {
+        Heading: {
+            baseStyle: {
+                color: customColorTheme.custom_dark[600],
+            },
+        },
+        Text: {
+            baseStyle: {
+                color: customColorTheme.custom_dark[600],
+            },
+        },
+        Button: {
+            baseStyle: {
+                borderColor: customColorTheme.custom_dark[100],
+                borderRadius: 12,
+                height: 12,
+            },
+        },
         Input: {
             baseStyle: {
                 backgroundColor: customColorTheme.custom_white[500],
-                borderColor: customColorTheme.custom_dark[100],
+                borderRadius: 8,
+                height: 12,
                 _focus: {
                     borderColor: customColorTheme.custom_dark[500],
                 },
@@ -119,7 +136,7 @@ export default function App() {
     return (
         <NativeBaseProvider theme={theme}>
             <NavigationContainer>
-                <RootStackScreen isAuthenticated={false} />
+                <RootStackScreen isAuthenticated={true} />
             </NavigationContainer>
         </NativeBaseProvider>
     )
