@@ -3,6 +3,15 @@
 Info: I am satisfying the required functionalities for the app while adding my own creative twist.
 
 Timeline for App Development
+
+---
+
+**Feb. 12, 2023**
+
+- Setup backend with ExpressJS
+- Changed the UI for form fields
+- UI elements now default to specific set styles
+
 ---
 
 **Feb. 11, 2023**
