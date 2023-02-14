@@ -6,6 +6,15 @@ Timeline for App Development
 
 ---
 
+**Feb. 13, 2023**
+
+- Setup MongoDB using Mongoose
+- Setup User Mongo Schema & fields
+- organized routing and controllers
+- added eslint and prettier for code formatting on the backend
+
+---
+
 **Feb. 12, 2023**
 
 - Context Hook for User Authentication. (JWT AUTH will be used)
