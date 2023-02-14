@@ -1,23 +1,25 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const Router = require("./routes/routes");
-const app = express();
-app.use(express.json());
-const port = 3000;
+const express = require('express')
+const cors = require('cors')
+const mongoose = require('mongoose')
+require('dotenv').config()
+const Router = require('./routes/routes')
+const app = express()
+app.use(cors())
+app.use(express.json())
 
 //#region Mongo Connection
 // Dev Note: DO NOT USE 'localhost" instead use following below
-mongoose.connect("mongodb://127.0.0.1:27017/schoolapp", {
-  useNewUrlParser: true,
-});
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "Connection Error "));
-db.once("open", () => {
-  console.log("Connection Successful");
-});
+mongoose.connect('mongodb://127.0.0.1:27017/schoolapp', {
+    useNewUrlParser: true,
+})
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'Connection Error '))
+db.once('open', () => {
+    console.log('Connection Successful')
+})
 //#endregion
 
-app.use(Router);
-app.listen(port, () => {
-  console.log(`Working on port: ${port}`);
-});
+app.use(Router)
+app.listen(process.env.PORT, () => {
+    console.log(`Working on port: ${process.env.PORT}`)
+})
