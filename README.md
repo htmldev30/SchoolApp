@@ -6,6 +6,15 @@ Timeline for App Development
 
 ---
 
+**Feb. 15, 2023**
+
+- Setup Backend JWT Authentication and overall user registration
+- Password Hashing enabled
+- Setup user registration for frontend
+- Todo: Connect Frontend Client to Backend Server for Authentication
+
+---
+
 **Feb. 13, 2023**
 
 - Setup MongoDB using Mongoose
