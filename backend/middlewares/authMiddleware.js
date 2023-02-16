@@ -4,11 +4,12 @@ const jwt = require('jsonwebtoken')
 // Author: Idris Olubisi
 const verifyToken = (req, res, next) => {
     // getting JWT Token from the request headers
-    const jwtToken = req.headers.authorization.split(' ')[1]
-    if (!jwtToken) {
+    const authorizationHeader = req.headers.authorization
+    if (!authorizationHeader) {
         return res.status(403).send('A token is required for authentication')
     }
     try {
+        const jwtToken = authorizationHeader.split(' ')[1]
         const decodedUser = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY)
         req.user = decodedUser
     } catch (err) {

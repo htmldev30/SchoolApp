@@ -22,8 +22,7 @@ db.once('open', () => {
 
 app.use(Router)
 
-app.get('/', verifyToken, (req, res) => {
-    const user = req.user
+app.get('/', (req, res) => {
     res.status(200).send('Welcome. You Are Authenticated')
 })
 app.listen(process.env.PORT, () => {

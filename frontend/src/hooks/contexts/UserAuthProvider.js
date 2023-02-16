@@ -5,7 +5,19 @@ export const UserAuthContext = createContext(null)
 
 export const UserAuthProvider = (props) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
-    useEffect(() => {}, [])
+    const [user, setUser] = useState({
+        accountType: null,
+        firstName: null,
+        lastName: null,
+        email: null,
+    })
+    useEffect(() => {
+        if (isAuthenticated) {
+            console.log('Authenticated')
+        } else {
+            console.log('Not Authenticated')
+        }
+    }, [isAuthenticated])
     return (
         <UserAuthContext.Provider value={{ isAuthenticated }}>
             {props.children}
