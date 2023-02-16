@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
+    accountType: {
+        type: String,
+        require: true,
+    },
     firstName: {
         type: String,
         required: true,
@@ -18,10 +22,8 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    uuid: {
+    jwtToken: {
         type: String,
-        required: true,
-        unique: true,
     },
 })
 

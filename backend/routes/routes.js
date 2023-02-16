@@ -1,3 +1,3 @@
-const userAuthRouter = require("./userAuth");
+const userAuthRouter = require('./userAuthRoutes')
 
-module.exports = userAuthRouter;
+module.exports = userAuthRouter

@@ -3,6 +3,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 require('dotenv').config()
 const Router = require('./routes/routes')
+const verifyToken = require('./middlewares/authMiddleware')
 const app = express()
 app.use(cors())
 app.use(express.json())
@@ -20,6 +21,11 @@ db.once('open', () => {
 //#endregion
 
 app.use(Router)
+
+app.get('/', verifyToken, (req, res) => {
+    const user = req.user
+    res.status(200).send('Welcome. You Are Authenticated')
+})
 app.listen(process.env.PORT, () => {
     console.log(`Working on port: ${process.env.PORT}`)
 })
