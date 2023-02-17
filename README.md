@@ -1,8 +1,19 @@
 # SchoolApp (for FBLA competition)
 
+## Mohammed Hit (Programmer) and Haylie Romero (UI Designer & Artist)
+
 Info: I am satisfying the required functionalities for the app while adding my own creative twist.
 
 Timeline for App Development
+
+---
+
+**Feb. 16, 2023**
+
+- User Authentication registration fully setup
+- JWT setup & stored in AsyncStorage
+- User information stored locally with Async Storage
+- User Auth Context setup to check auth status
 
 ---
 
