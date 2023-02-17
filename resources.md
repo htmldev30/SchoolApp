@@ -7,4 +7,4 @@ User Interface:
   - Ink Wireframe by Nitish Khagwal (v10)
 
 Artwork:
-  - (Piskelapp)[!http://github.com/piskelapp/piskel]
+  - [Piskelapp](https://github.com/piskelapp/piskel) (v0.15.0)
