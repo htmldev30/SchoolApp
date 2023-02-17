@@ -1,6 +1,6 @@
 # SchoolApp (for FBLA competition)
 
-## Mohammed Hit (Programmer) and Haylie Romero (UI Designer & Artist)
+### Mohammed Hit (Programmer) and Haylie Romero (UI Designer & Artist)
 
 Info: I am satisfying the required functionalities for the app while adding my own creative twist.
 
