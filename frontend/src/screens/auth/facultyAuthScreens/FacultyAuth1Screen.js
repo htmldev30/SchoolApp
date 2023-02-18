@@ -1,8 +1,7 @@
-import React from 'react'
-import { Heading, Text, Box, VStack, Center } from 'native-base'
+import React, { useContext } from 'react'
+import { Heading, Text, Box, Center } from 'native-base'
 
 // Custom Imports
-import { CustomButton } from '../../../components/customButton'
 export const FacultyAuth1Screen = ({ navigation }) => {
     return (
         <Box flex="1" m="4" p="2" safeAreaTop>

@@ -22,9 +22,9 @@ db.once('open', () => {
 
 app.use(Router)
 
-app.get('/', (req, res) => {
+app.get('/', verifyToken, (req, res) => {
     res.status(200).send('Welcome. You Are Authenticated')
 })
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, process.env.SERVER, () => {
     console.log(`Working on port: ${process.env.PORT}`)
 })

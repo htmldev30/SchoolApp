@@ -43,7 +43,13 @@ exports.userRegistration = async (req, res) => {
                 ? console.log('Error: ', err)
                 : console.log('Result: Document Creation Successful')
         })
-        res.status(201).json(user)
+        res.status(201).json({
+            accountType: user.accountType,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            jwtToken: user.jwtToken,
+        })
     } catch (err) {
         res.status(500).send(err)
     }
@@ -58,19 +64,37 @@ exports.userLogin = async (req, res) => {
         // Finds existing user via email
         const lowerCasedEmail = email.toLowerCase()
         const user = await userModel.findOne({ email: lowerCasedEmail })
-        // Compares given password with hashed password
-        const passwordValidation = bcrypt.compare(password, user.password)
-
-        if (user && passwordValidation) {
+        // Compares given password with hashed password / await it
+        const passwordValid = await bcrypt.compare(password, user.password)
+        console.log(passwordValid)
+        if (user && passwordValid) {
             const jwtToken = jwt.sign(
                 { user_id: user._id, email },
                 process.env.JWT_SECRET_KEY,
                 { expiresIn: '2h' },
             )
             user.jwtToken = jwtToken
-            user.save()
-            res.status(200).json(user)
+            user.save((err, res) => {
+                err
+                    ? console.log('Error: ', err)
+                    : console.log('Result: Login Successful')
+            })
+            res.status(200).json({
+                accountType: user.accountType,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                jwtToken: user.jwtToken,
+            })
         }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+exports.userLogout = async (req, res) => {
+    try {
+        res.status(200).send('You are now logged out.')
     } catch (err) {
         console.log(err)
     }

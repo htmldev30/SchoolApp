@@ -1,8 +1,7 @@
-# Artwork by Haylie Romero 
-*Partner for FBLA APP Dev. Comp.*
+# Artwork by Haylie Romero
+
+_Partner for FBLA APP Dev. Comp._
 
 Art Software:
-  - [Piskelapp](http://github.com/piskelapp/piskel)
 
-**Artwork**
-    - "formUploadingAnimation.gif" ~ Haylie Romero 
+- [Piskelapp](http://github.com/piskelapp/piskel)

@@ -2,7 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 // Screens
-import { FacultyAuth1Screen } from '../../../screens/auth/facultyAuth/facultyAuth1Screen'
+import { FacultyAuth1Screen } from '../../screens/auth/facultyAuthScreens/FacultyAuth1Screen'
 
 const FacultyAuthStack = createStackNavigator()
 

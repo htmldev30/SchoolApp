@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { VStack, Icon } from 'native-base'
 import { Feather } from '@expo/vector-icons'
+import axios from 'axios'
 // Custom Imports
-import { axiosClient } from '../../../apiClient'
+import { UserAuthContext } from '../../hooks/contexts/UserAuthProvider'
+import { axiosClient } from '../../../axiosClient'
 import { CustomInput } from '../../components/customInput'
 import { CustomButton } from '../../components/customButton'
-import { storeUserInfo, storeUserJWT } from '../../shared/asyncStorage'
-import axios from 'axios'
-export const ParentAuth1Form = () => {
-    const [accountType, setAccountType] = useState('parent')
+import { storeUserInfo, storeUserJWTToken } from '../../shared/asyncStorage'
+export const ParentStudentAuthForm = ({ userAccountType }) => {
+    const { checkAuthenticationStatus } = useContext(UserAuthContext)
+    const [accountType, setAccountType] = useState(userAccountType) // userAccountType == accountType | changed name because a variable already exists
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
@@ -16,18 +18,30 @@ export const ParentAuth1Form = () => {
 
     // TODO: Resolve error where Axios cannot connect to backend.
     const handleSubmit = async () => {
-        console.log(firstName, lastName, email, password)
-        console.log('Clicked')
-        await axios({
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            },
-            method: 'get',
-            url: 'http://127.0.0.1:3000/',
-        })
+        await axiosClient
+            .post('/v1/auth/register', {
+                accountType: accountType,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password,
+            })
             .then((res) => {
-                console.log(res)
+                const { accountType, firstName, lastName, email, jwtToken } =
+                    res.data
+                storeUserJWTToken(jwtToken)
+                storeUserInfo({
+                    accountType: accountType,
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                })
+                axios.defaults.headers.common['Authorization'] =
+                    'Bearer ' + jwtToken
+
+                // CHECK AuthenticationStatus function relies on JWTTOKEN being present or not present.
+                // Have JWT Token state change before checking!
+                checkAuthenticationStatus()
             })
             .catch((err) => {
                 console.log(err)

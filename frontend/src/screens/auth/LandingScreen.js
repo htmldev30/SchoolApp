@@ -1,7 +1,7 @@
 import React from 'react'
 import { Heading, Text, Box, VStack, Center } from 'native-base'
 // Custom Imports
-import { CustomButton } from '../components/customButton'
+import { CustomButton } from '../../components/customButton'
 export const LandingScreen = ({ navigation }) => {
     return (
         <Box flex="1" m="4" p="2" safeAreaTop>
@@ -15,11 +15,16 @@ export const LandingScreen = ({ navigation }) => {
                 </Center>
                 <VStack space={2} w="100%" pt="4" px="4">
                     <CustomButton
+                        variant="ghost"
+                        label="Login"
+                        onPress={() => navigation.navigate('Login')}
+                    />
+                    <CustomButton
                         variant="outline"
                         label="Parent"
                         onPress={() =>
-                            navigation.navigate('ParentAuth', {
-                                screen: 'ParentAuth1',
+                            navigation.navigate('ParentStudentAuth', {
+                                accountType: 'parent',
                             })
                         }
                     />
@@ -27,8 +32,8 @@ export const LandingScreen = ({ navigation }) => {
                         variant="outline"
                         label="Student"
                         onPress={() =>
-                            navigation.navigate('StudentAuth', {
-                                screen: 'StudentAuth1',
+                            navigation.navigate('ParentStudentAuth', {
+                                accountType: 'student',
                             })
                         }
                     />
