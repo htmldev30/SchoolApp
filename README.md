@@ -8,6 +8,24 @@ Timeline for App Development
 
 ---
 
+**Feb. 1, 2023**
+
+- User Authentication registration fully setup
+- JWT setup & stored in AsyncStorage
+- User information stored locally with Async Storage
+- User Auth Context setup to check auth status
+
+---
+
+**Feb. 17, 2023**
+
+- User Login / Logout functionalities setup
+- AsyncStorage and Auth state changes setup
+- Structural changes to the files to eliminate redundancy
+- NOTE TO SELF: Change app color pallette theme
+
+---
+
 **Feb. 16, 2023**
 
 - User Authentication registration fully setup
