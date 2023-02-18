@@ -56,14 +56,7 @@ export const ParentStudentAuthForm = ({ userAccountType }) => {
                 onChangeText={(newFirstNameText) =>
                     setFirstName(newFirstNameText)
                 }
-                InputLeftElement={
-                    <Icon
-                        as={<Feather name="user" />}
-                        size={5}
-                        ml="2"
-                        color="custom_dark.100"
-                    />
-                }
+                InputLeftElement={<Icon as={<Feather name="user" />} />}
             />
 
             <CustomInput
@@ -71,42 +64,21 @@ export const ParentStudentAuthForm = ({ userAccountType }) => {
                 size="lg"
                 placeholder="Last Name"
                 onChangeText={(newLastNameText) => setLastName(newLastNameText)}
-                InputLeftElement={
-                    <Icon
-                        as={<Feather name="user" />}
-                        size={5}
-                        ml="2"
-                        color="custom_dark.100"
-                    />
-                }
+                InputLeftElement={<Icon as={<Feather name="user" />} />}
             />
             <CustomInput
                 type="email"
                 size="lg"
                 placeholder="Email Name"
                 onChangeText={(newEmailText) => setEmail(newEmailText)}
-                InputLeftElement={
-                    <Icon
-                        as={<Feather name="mail" />}
-                        size={5}
-                        ml="2"
-                        color="custom_dark.100"
-                    />
-                }
+                InputLeftElement={<Icon as={<Feather name="mail" />} />}
             />
             <CustomInput
                 type="password"
                 size="lg"
                 placeholder="Password"
                 onChangeText={(newPasswordText) => setPassword(newPasswordText)}
-                InputLeftElement={
-                    <Icon
-                        as={<Feather name="lock" />}
-                        size={5}
-                        ml="2"
-                        color="custom_dark.100"
-                    />
-                }
+                InputLeftElement={<Icon as={<Feather name="lock" />} />}
             />
             <CustomButton label="Sign Up" onPress={handleSubmit} />
         </VStack>

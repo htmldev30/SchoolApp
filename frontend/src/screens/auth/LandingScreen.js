@@ -20,7 +20,7 @@ export const LandingScreen = ({ navigation }) => {
                         onPress={() => navigation.navigate('Login')}
                     />
                     <CustomButton
-                        variant="outline"
+                        variant="ghost"
                         label="Parent"
                         onPress={() =>
                             navigation.navigate('ParentStudentAuth', {
@@ -29,7 +29,7 @@ export const LandingScreen = ({ navigation }) => {
                         }
                     />
                     <CustomButton
-                        variant="outline"
+                        variant="ghost"
                         label="Student"
                         onPress={() =>
                             navigation.navigate('ParentStudentAuth', {
@@ -38,7 +38,7 @@ export const LandingScreen = ({ navigation }) => {
                         }
                     />
                     <CustomButton
-                        variant="outline"
+                        variant="ghost"
                         label="Faculty"
                         onPress={() =>
                             navigation.navigate('FacultyAuth', {

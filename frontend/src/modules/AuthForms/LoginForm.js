@@ -48,28 +48,14 @@ export const LoginForm = () => {
                 size="lg"
                 placeholder="Email Name"
                 onChangeText={(newEmailText) => setEmail(newEmailText)}
-                InputLeftElement={
-                    <Icon
-                        as={<Feather name="mail" />}
-                        size={5}
-                        ml="2"
-                        color="custom_dark.100"
-                    />
-                }
+                InputLeftElement={<Icon as={<Feather name="mail" />} />}
             />
             <CustomInput
                 type="password"
                 size="lg"
                 placeholder="Password"
                 onChangeText={(newPasswordText) => setPassword(newPasswordText)}
-                InputLeftElement={
-                    <Icon
-                        as={<Feather name="lock" />}
-                        size={5}
-                        ml="2"
-                        color="custom_dark.100"
-                    />
-                }
+                InputLeftElement={<Icon as={<Feather name="lock" />} />}
             />
             <CustomButton label="Login" onPress={handleSubmit} />
         </VStack>
