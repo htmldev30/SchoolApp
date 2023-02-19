@@ -21,19 +21,22 @@ export const ParentStudentAuthForm = ({ userAccountType }) => {
         await axiosClient
             .post('/v1/auth/register', {
                 accountType: accountType,
-                firstName: firstName,
-                lastName: lastName,
+                fullName: {
+                    firstName: firstName,
+                    lastName: lastName,
+                },
                 email: email,
                 password: password,
             })
             .then((res) => {
-                const { accountType, firstName, lastName, email, jwtToken } =
-                    res.data
+                const { accountType, fullName, email, jwtToken } = res.data
                 storeUserJWTToken(jwtToken)
                 storeUserInfo({
                     accountType: accountType,
-                    firstName: firstName,
-                    lastName: lastName,
+                    fullName: {
+                        firstName: fullName.firstName,
+                        lastName: fullName.lastName,
+                    },
                     email: email,
                 })
                 axios.defaults.headers.common['Authorization'] =

@@ -8,7 +8,8 @@ const saltRounds = 10 //required by bcrypt
 // Author: Idris Olubisi
 exports.userRegistration = async (req, res) => {
     try {
-        const { accountType, firstName, lastName, email, password } = req.body
+        // firstName, lastName info sent separately from frontend
+        const { accountType, fullName, email, password } = req.body
         const lowerCasedEmail = email.toLowerCase()
         const userExists = await userModel.exists({ email: lowerCasedEmail })
         if (userExists) {
@@ -20,10 +21,13 @@ exports.userRegistration = async (req, res) => {
         }
 
         let hashedPassword = await bcrypt.hash(password, saltRounds)
+
         const user = new userModel({
             accountType: accountType,
-            firstName: firstName,
-            lastName: lastName,
+            fullName: {
+                firstName: fullName.firstName,
+                lastName: fullName.lastName,
+            },
             email: lowerCasedEmail,
             password: hashedPassword,
         })
@@ -38,6 +42,7 @@ exports.userRegistration = async (req, res) => {
         )
 
         user.jwtToken = jwtToken
+
         user.save((err, res) => {
             err
                 ? console.log('Error: ', err)
@@ -45,8 +50,10 @@ exports.userRegistration = async (req, res) => {
         })
         res.status(201).json({
             accountType: user.accountType,
-            firstName: user.firstName,
-            lastName: user.lastName,
+            fullName: {
+                firstName: user.fullName.firstName,
+                lastName: user.fullName.lastName,
+            },
             email: user.email,
             jwtToken: user.jwtToken,
         })
@@ -66,7 +73,6 @@ exports.userLogin = async (req, res) => {
         const user = await userModel.findOne({ email: lowerCasedEmail })
         // Compares given password with hashed password / await it
         const passwordValid = await bcrypt.compare(password, user.password)
-        console.log(passwordValid)
         if (user && passwordValid) {
             const jwtToken = jwt.sign(
                 { user_id: user._id, email },

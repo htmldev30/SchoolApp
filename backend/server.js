@@ -1,9 +1,13 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
-require('dotenv').config()
-const Router = require('./routes/routes')
 const verifyToken = require('./middlewares/authMiddleware')
+
+// Customs
+const userAssociatedRouter = require('./routes/userAssociatedRoutes')
+const userAuthRouter = require('./routes/userAuthRoutes')
+
+require('dotenv').config()
 const app = express()
 app.use(cors())
 app.use(express.json())
@@ -19,8 +23,8 @@ db.once('open', () => {
     console.log('Connection Successful')
 })
 //#endregion
-
-app.use(Router)
+app.use('/v1/auth', userAuthRouter)
+app.use('/v1/userAssociated', userAssociatedRouter)
 
 app.get('/', verifyToken, (req, res) => {
     res.status(200).send('Welcome. You Are Authenticated')
