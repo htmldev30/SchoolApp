@@ -8,6 +8,14 @@ Timeline for App Development
 
 ---
 
+**Feb. 18, 2023**
+
+- User Association Complete
+- Changes to UI and Color Pallette
+- Database Schema Changes
+
+---
+
 **Feb. 17, 2023**
 
 - User Login / Logout functionalities setup
