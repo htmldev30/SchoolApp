@@ -4,6 +4,7 @@ import Feather from '@expo/vector-icons/Feather'
 // StackScreens
 import { FeedStackScreens } from './stacks/feedStack'
 import { ProfileStackScreens } from './stacks/profileStack'
+import { AssociatedUsersStackScreens } from './stacks/associatedUserStack'
 const AppTab = createBottomTabNavigator()
 
 export const AppNavigation = () => {
@@ -93,7 +94,10 @@ export const AppNavigation = () => {
             <AppTab.Screen name="Feed" component={FeedStackScreens} />
             <AppTab.Screen name="Calendar" component={FeedStackScreens} />
             <AppTab.Screen name="Alerts" component={FeedStackScreens} />
-            <AppTab.Screen name="My Students" component={FeedStackScreens} />
+            <AppTab.Screen
+                name="My Students"
+                component={AssociatedUsersStackScreens}
+            />
             <AppTab.Screen name="Profile" component={ProfileStackScreens} />
         </AppTab.Navigator>
     )

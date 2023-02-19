@@ -2,7 +2,6 @@ const userModel = require('../../models/userSchema')
 exports.associateUser = async (req, res) => {
     try {
         const { accountType, userEmail, usersToAssociate } = req.body
-
         const user = await userModel.findOne({ email: userEmail })
         if (!user) {
             res.status(500).send('This user does not exist')
