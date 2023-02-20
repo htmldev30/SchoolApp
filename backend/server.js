@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const verifyToken = require('./middlewares/authMiddleware')
 
 // Customs
-const userAssociatedRouter = require('./routes/userAssociatedRoutes')
+const userAssociateRouter = require('./routes/userAssociateRoutes')
 const userAuthRouter = require('./routes/userAuthRoutes')
 
 require('dotenv').config()
@@ -24,7 +24,7 @@ db.once('open', () => {
 })
 //#endregion
 app.use('/v1/auth', userAuthRouter)
-app.use('/v1/userAssociated', userAssociatedRouter)
+app.use('/v1/userAssociate', userAssociateRouter)
 
 app.get('/', verifyToken, (req, res) => {
     res.status(200).send('Welcome. You Are Authenticated')

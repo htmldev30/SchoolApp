@@ -46,7 +46,7 @@ exports.userRegistration = async (req, res) => {
         user.save((err, res) => {
             err
                 ? console.log('Error: ', err)
-                : console.log('Result: Document Creation Successful')
+                : console.log('Result: User Registration Successful')
         })
         res.status(201).json({
             accountType: user.accountType,
@@ -87,8 +87,10 @@ exports.userLogin = async (req, res) => {
             })
             res.status(200).json({
                 accountType: user.accountType,
-                firstName: user.firstName,
-                lastName: user.lastName,
+                fullName: {
+                    firstName: user.fullName.firstName,
+                    lastName: user.fullName.lastName,
+                },
                 email: user.email,
                 jwtToken: user.jwtToken,
             })

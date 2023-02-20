@@ -1,33 +1,9 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
 const UserSchema = new mongoose.Schema({
     accountType: {
         type: String,
         require: true,
     },
-    associatedUsersInformation: [
-        {
-            associatedUserFullName: {
-                associatedUserFirstName: {
-                    type: String,
-                    default: null,
-                },
-                associatedUserLastName: {
-                    type: String,
-                    default: null,
-                },
-            },
-            associatedUserGrade: {
-                type: Number,
-                default: null,
-            },
-            associatedUser: {
-                type: Schema.Types.ObjectId,
-                ref: 'User',
-                default: null,
-            },
-        },
-    ],
     fullName: {
         firstName: {
             type: String,
@@ -50,6 +26,7 @@ const UserSchema = new mongoose.Schema({
     jwtToken: {
         type: String,
     },
+    associatedUsers: [],
 })
 
 UserSchema.pre('save', async function (next) {

@@ -5,9 +5,14 @@ import Feather from '@expo/vector-icons/Feather'
 import { FeedStackScreens } from './stacks/feedStack'
 import { ProfileStackScreens } from './stacks/profileStack'
 import { AssociatedUsersStackScreens } from './stacks/associatedUserStack'
-const AppTab = createBottomTabNavigator()
+import { getUserInfo } from '../shared/asyncStorage'
 
+const AppTab = createBottomTabNavigator()
 export const AppNavigation = () => {
+    const getUserType = async () => {
+        const userInfo = await getUserInfo()
+        return userInfo.accountType
+    }
     return (
         // Hiding Header of screens below
         <AppTab.Navigator
@@ -66,6 +71,7 @@ export const AppNavigation = () => {
                             )
                         }
                     }
+
                     if (route.name === 'My Students') {
                         if (focused) {
                             return (
