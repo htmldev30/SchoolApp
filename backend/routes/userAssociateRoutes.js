@@ -4,7 +4,7 @@ const userAssociateRouter = express.Router()
 const verifyToken = require('../middlewares/authMiddleware')
 const userAssociateController = require('../controllers/userAssociate/userAssociateController')
 
-userAssociateRouter.get(
+userAssociateRouter.post(
     '/getAssociationRequests',
     verifyToken,
     userAssociateController.getAssociationRequests,

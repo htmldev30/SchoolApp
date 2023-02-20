@@ -2,33 +2,33 @@ import React, { createContext, useState, useEffect } from 'react'
 
 // Customs
 import { axiosClient } from '../../../axiosClient'
-import { getUserInfo, getUserJWTToken } from '../../shared/asyncStorage'
+import { getUserInfo } from '../../shared/asyncStorage'
 
-export const AssociatedUsersContext = createContext(null)
+export const AssociatedUsersContext = createContext()
 
 export const AssociatedUsersProvider = (props) => {
-    const [associatedUsers, setAssociatedUsers] = useState({})
+    const [associationRequests, setAssociationRequests] = useState()
     useEffect(() => {
-        getAssociatedUsers()
+        getAssociationRequests()
     }, [])
 
-    const getAssociatedUsers = async () => {
+    const getAssociationRequests = async () => {
         const userInfo = await getUserInfo()
-
         await axiosClient
-            .post('/v1/userAssociated/getAssociatedUsers', {
-                userEmail: userInfo.accountType,
+            .post('/v1/userAssociate/getAssociationRequests', {
+                recipientEmail: userInfo.email,
             })
             .then((res) => {
-                console.log(res.data)
+                setAssociationRequests(res.data)
             })
             .catch((err) => {
                 console.log(err)
             })
-        setAssociatedUsers({})
     }
     return (
-        <AssociatedUsersContext.Provider value={{ getAssociatedUsers }}>
+        <AssociatedUsersContext.Provider
+            value={{ associationRequests, getAssociationRequests }}
+        >
             {props.children}
         </AssociatedUsersContext.Provider>
     )

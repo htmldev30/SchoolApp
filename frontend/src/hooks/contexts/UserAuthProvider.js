@@ -1,22 +1,28 @@
 import React, { createContext, useState, useEffect } from 'react'
-import { getUserJWTToken } from '../../shared/asyncStorage'
+import { getUserInfo, getUserJWTToken } from '../../shared/asyncStorage'
 
 export const UserAuthContext = createContext(null)
 
 export const UserAuthProvider = (props) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
-
+    const [accountType, setAccountType] = useState(null)
     useEffect(() => {
         checkAuthenticationStatus()
     }, [])
 
     const checkAuthenticationStatus = async () => {
         const userJWTTOKEN = await getUserJWTToken()
-        userJWTTOKEN ? setIsAuthenticated(true) : setIsAuthenticated(false)
+        const userInfo = await getUserInfo()
+        if (userJWTTOKEN && userInfo) {
+            setIsAuthenticated(true)
+            setAccountType(userInfo.accountType)
+        } else {
+            setIsAuthenticated(false)
+        }
     }
     return (
         <UserAuthContext.Provider
-            value={{ isAuthenticated, checkAuthenticationStatus }}
+            value={{ isAuthenticated, accountType, checkAuthenticationStatus }}
         >
             {props.children}
         </UserAuthContext.Provider>

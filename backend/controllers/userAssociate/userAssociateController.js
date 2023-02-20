@@ -7,7 +7,6 @@ exports.getAssociationRequests = async (req, res) => {
         const recipient = await userModel.findOne({
             email: recipientEmail,
         })
-
         // if recipient is not a student, then they cannot access this page
         if (recipient.accountType !== 'student') {
             throw new Error(
@@ -19,6 +18,7 @@ exports.getAssociationRequests = async (req, res) => {
         const associationRequests = await associateRequestModel.find({
             recipient: recipient._id,
         })
+
         // find all users that have requested association with this recipient
         const associationRequestUsersTemp = []
         for (i = 0; i < associationRequests.length; i++) {

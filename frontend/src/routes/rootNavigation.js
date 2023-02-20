@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack'
 // Navigation Stacks
 import { AppNavigation } from './appNavigation'
 import { AuthNavigation } from './authNavigation'
-
 const RootStack = createStackNavigator()
 
 export const RootStackScreen = ({ isAuthenticated }) => {

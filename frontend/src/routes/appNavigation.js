@@ -1,18 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Feather from '@expo/vector-icons/Feather'
 // StackScreens
 import { FeedStackScreens } from './stacks/feedStack'
 import { ProfileStackScreens } from './stacks/profileStack'
 import { AssociatedUsersStackScreens } from './stacks/associatedUserStack'
-import { getUserInfo } from '../shared/asyncStorage'
+// Customs
+import { UserAuthContext } from '../hooks/contexts/UserAuthProvider'
 
 const AppTab = createBottomTabNavigator()
 export const AppNavigation = () => {
-    const getUserType = async () => {
-        const userInfo = await getUserInfo()
-        return userInfo.accountType
-    }
+    const { accountType } = useContext(UserAuthContext)
     return (
         // Hiding Header of screens below
         <AppTab.Navigator
@@ -71,8 +69,10 @@ export const AppNavigation = () => {
                             )
                         }
                     }
-
-                    if (route.name === 'My Students') {
+                    if (
+                        accountType == 'parent' &&
+                        route.name === 'My Students'
+                    ) {
                         if (focused) {
                             return (
                                 <Feather name="smile" size={24} color="black" />
@@ -100,10 +100,13 @@ export const AppNavigation = () => {
             <AppTab.Screen name="Feed" component={FeedStackScreens} />
             <AppTab.Screen name="Calendar" component={FeedStackScreens} />
             <AppTab.Screen name="Alerts" component={FeedStackScreens} />
-            <AppTab.Screen
-                name="My Students"
-                component={AssociatedUsersStackScreens}
-            />
+            {accountType == 'parent' ? (
+                <AppTab.Screen
+                    name="My Students"
+                    component={AssociatedUsersStackScreens}
+                />
+            ) : null}
+
             <AppTab.Screen name="Profile" component={ProfileStackScreens} />
         </AppTab.Navigator>
     )
