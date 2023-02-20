@@ -6,6 +6,16 @@ Info: I am satisfying the required functionalities for the app while adding my o
 
 Timeline for App Development
 
+
+---
+
+**Feb. 19, 2023**
+
+- User Association Adjusted & Complete
+- Adjusted Database Schema & Added New Schema
+- Customized Frontend UI Elements As Necessary 
+- NOTE TO SELF: SETUP AWS S3 FOR USER PROFILE PICTURE
+
 ---
 
 **Feb. 18, 2023**
