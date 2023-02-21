@@ -42,7 +42,7 @@ export const UserAuthProvider = (props) => {
                     // storeUserInfo(res.data)
                 })
                 .catch((err) => {
-                    console.log(err)
+                    console.log(err.response.data.error)
                 })
         }
     }

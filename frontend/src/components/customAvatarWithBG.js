@@ -14,9 +14,9 @@ export const CustomAvatarWithBG = ({
                 <Box>
                     <Center>
                         <Text fontSize="2xl" mt={5}>
-                            Mohammed Hit
+                            {associatedUserName}
                         </Text>
-                        <Text fontSize="lg">12</Text>
+                        <Text fontSize="lg">{associatedUserGrade}</Text>
                     </Center>
                 </Box>
             </Center>

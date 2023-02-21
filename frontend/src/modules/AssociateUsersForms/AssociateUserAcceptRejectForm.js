@@ -21,7 +21,7 @@ export const AssociateUserAcceptRejectForm = ({
                 getAssociationRequests()
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err.response.data.error)
             })
     }
     return (

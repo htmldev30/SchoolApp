@@ -45,7 +45,7 @@ export const ParentStudentAuthForm = ({ userAccountType }) => {
                 checkAuthenticationStatus()
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err.response.data.error)
             })
     }
     return (

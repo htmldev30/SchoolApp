@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { VStack, Icon } from 'native-base'
+import { VStack, Icon, Text } from 'native-base'
 import { Feather } from '@expo/vector-icons'
 import axios from 'axios'
 
@@ -11,9 +11,10 @@ import { getUserInfo } from '../../shared/asyncStorage'
 
 export const AssociateUserForm = () => {
     const [userToAssociateEmail, setUserToAssociateEmail] = useState('')
+    const [messages, setMessages] = useState(null)
+
     const handleSubmit = async () => {
         const userInfo = await getUserInfo()
-        console.log(userInfo)
 
         await axiosClient
             .post('/v1/userAssociate/requestAssociation', {
@@ -21,14 +22,16 @@ export const AssociateUserForm = () => {
                 recipientEmail: userToAssociateEmail,
             })
             .then((res) => {
-                console.log(res.data)
+                console.log('HELLO WORLD')
+                setMessages(res.response)
             })
             .catch((err) => {
-                console.log(err)
+                setMessages(err.response.data.error)
             })
     }
     return (
-        <VStack space={2.5} w="100%" pt="4">
+        <VStack space={2.5} w="100%">
+            {messages ? <Text color={'danger.400'}>{messages}</Text> : null}
             <CustomInput
                 type="email"
                 size="lg"

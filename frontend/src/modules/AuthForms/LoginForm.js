@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
-import { VStack, Icon } from 'native-base'
+import { VStack, Icon, Text } from 'native-base'
 import { Feather } from '@expo/vector-icons'
-import axios from 'axios'
 // Custom Imports
 import { UserAuthContext } from '../../hooks/contexts/UserAuthProvider'
 import { axiosClient } from '../../../axiosClient'
@@ -12,8 +11,7 @@ export const LoginForm = () => {
     const { checkAuthenticationStatus } = useContext(UserAuthContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
-    // TODO: Resolve error where Axios cannot connect to backend.
+    const [messages, setMessages] = useState(null)
     const handleSubmit = async () => {
         await axiosClient
             .post('/v1/auth/login', {
@@ -21,13 +19,21 @@ export const LoginForm = () => {
                 password: password,
             })
             .then((res) => {
-                const { accountType, firstName, lastName, email, jwtToken } =
-                    res.data
+                const {
+                    accountType,
+                    fullName,
+                    email,
+                    associatedUsers,
+                    jwtToken,
+                } = res.data
                 storeUserJWTToken(jwtToken)
                 storeUserInfo({
                     accountType: accountType,
-                    firstName: firstName,
-                    lastName: lastName,
+                    fullName: {
+                        firstName: fullName.firstName,
+                        lastName: fullName.lastName,
+                    },
+                    associatedUsers: associatedUsers,
                     email: email,
                 })
 
@@ -36,11 +42,13 @@ export const LoginForm = () => {
                 checkAuthenticationStatus()
             })
             .catch((err) => {
-                console.log(err)
+                setMessages(err.response.data.error)
             })
     }
     return (
         <VStack space={2.5} w="100%" pt="4" px="4">
+            {messages ? <Text color={'danger.400'}>{messages}</Text> : null}
+
             <CustomInput
                 type="email"
                 size="lg"

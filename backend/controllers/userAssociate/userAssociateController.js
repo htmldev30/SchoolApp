@@ -39,7 +39,9 @@ exports.getAssociationRequests = async (req, res) => {
         }
         res.status(200).send(associationRequestUsersTemp)
     } catch (err) {
-        res.status(500).send(err)
+        res.status(500).send({
+            error: err.message,
+        })
     }
 }
 exports.requestAssociation = async (req, res) => {
@@ -47,6 +49,10 @@ exports.requestAssociation = async (req, res) => {
         const { requesterEmail, recipientEmail } = req.body
         const requester = await userModel.findOne({ email: requesterEmail })
         const recipient = await userModel.findOne({ email: recipientEmail })
+
+        if (!recipient) {
+            throw new Error('Recipient Does Not Exist.')
+        }
         // Users that are not of "parent" accountType cannot associate accounts under them.
         if (requester.accountType !== 'parent') {
             throw new Error(
@@ -54,6 +60,13 @@ exports.requestAssociation = async (req, res) => {
             )
         }
 
+        requester.associatedUsers.forEach((associatedUser) => {
+            if (associatedUser.equals(recipient._id)) {
+                throw new Error('Users Already Associated.')
+            }
+        })
+
+        // TODO: FILTER TO MAKE SURE ONLY ONE ASSOCIATION REQUEST IS MADE PER USER TO USER
         const associateRequest = new associateRequestModel({
             requester: requester._id,
             recipient: recipient._id,
@@ -67,7 +80,9 @@ exports.requestAssociation = async (req, res) => {
         })
         res.status(201).send('User Associate Request Made.')
     } catch (err) {
-        res.status(500).send(err)
+        res.status(500).send({
+            error: err.message,
+        })
     }
 }
 
@@ -100,6 +115,8 @@ exports.verifyAssociation = async (req, res) => {
 
         associateRequest.delete()
     } catch (err) {
-        res.status(500).send(err)
+        res.status(500).send({
+            error: err.message,
+        })
     }
 }

@@ -6,7 +6,6 @@ import { CustomButton } from '../components/customButton'
 
 export const LatestScreen = () => {
     const [accountType, setAccountType] = useState('')
-
     useEffect(() => {
         checkAccountType()
     }, [])

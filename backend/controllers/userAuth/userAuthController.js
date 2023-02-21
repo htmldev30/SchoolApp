@@ -28,6 +28,7 @@ exports.userRegistration = async (req, res) => {
                 firstName: fullName.firstName,
                 lastName: fullName.lastName,
             },
+            associatedUsers: user.associatedUsers,
             email: lowerCasedEmail,
             password: hashedPassword,
         })
@@ -48,6 +49,7 @@ exports.userRegistration = async (req, res) => {
                 ? console.log('Error: ', err)
                 : console.log('Result: User Registration Successful')
         })
+        console.log(user.associatedUsers)
         res.status(201).json({
             accountType: user.accountType,
             fullName: {
@@ -55,10 +57,11 @@ exports.userRegistration = async (req, res) => {
                 lastName: user.fullName.lastName,
             },
             email: user.email,
+            associatedUsers: user.associatedUsers,
             jwtToken: user.jwtToken,
         })
     } catch (err) {
-        res.status(500).send(err)
+        res.status(500).send(err.message)
     }
 }
 
@@ -66,11 +69,16 @@ exports.userLogin = async (req, res) => {
     try {
         const { email, password } = req.body
         if (!(email && password)) {
-            res.status(400).send('Please input both fields.')
+            throw new Error('Please input both fields.')
         }
         // Finds existing user via email
         const lowerCasedEmail = email.toLowerCase()
         const user = await userModel.findOne({ email: lowerCasedEmail })
+        if (!user) {
+            throw new Error(
+                'A user associated with this email/password does not exist.',
+            )
+        }
         // Compares given password with hashed password / await it
         const passwordValid = await bcrypt.compare(password, user.password)
         if (user && passwordValid) {
@@ -85,18 +93,22 @@ exports.userLogin = async (req, res) => {
                     ? console.log('Error: ', err)
                     : console.log('Result: Login Successful')
             })
+
             res.status(200).json({
                 accountType: user.accountType,
                 fullName: {
                     firstName: user.fullName.firstName,
                     lastName: user.fullName.lastName,
                 },
+                associatedUsers: user.associatedUsers,
                 email: user.email,
                 jwtToken: user.jwtToken,
             })
         }
     } catch (err) {
-        console.log(err)
+        res.status(500).send({
+            error: err.message,
+        })
     }
 }
 
@@ -104,6 +116,8 @@ exports.userLogout = async (req, res) => {
     try {
         res.status(200).send('You are now logged out.')
     } catch (err) {
-        console.log(err)
+        res.status(500).send({
+            error: err.message,
+        })
     }
 }
