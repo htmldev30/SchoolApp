@@ -13,7 +13,7 @@ export const LogoutForm = () => {
             .get('/v1/auth/logout')
             .then((res) => {
                 AsyncStorage.removeItem('userJWTToken')
-                axiosClient.defaults.headers.common.Authorization = null
+                AsyncStorage.removeItem('userInfo')
 
                 // CHECK AuthenticationStatus function relies on JWTTOKEN being present or not present.
                 // Have JWT Token state change before checking!

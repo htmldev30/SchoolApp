@@ -4,16 +4,21 @@ import React, { createContext, useState, useEffect } from 'react'
 import { axiosClient } from '../../../axiosClient'
 import { getUserInfo } from '../../shared/asyncStorage'
 
-export const AssociatedUsersContext = createContext()
+export const UserAssociationRequestContext = createContext()
 
-export const AssociatedUsersProvider = (props) => {
+export const UserAssociationRequestProvider = (props) => {
     const [associationRequests, setAssociationRequests] = useState()
+
     useEffect(() => {
         getAssociationRequests()
     }, [])
 
     const getAssociationRequests = async () => {
         const userInfo = await getUserInfo()
+        // Because provider wraps around entire ProfileStack, if user is a parent, do not request API
+        if (userInfo.accountType == 'parent') {
+            return null
+        }
         await axiosClient
             .post('/v1/userAssociate/getAssociationRequests', {
                 recipientEmail: userInfo.email,
@@ -25,11 +30,12 @@ export const AssociatedUsersProvider = (props) => {
                 console.log(err)
             })
     }
+
     return (
-        <AssociatedUsersContext.Provider
+        <UserAssociationRequestContext.Provider
             value={{ associationRequests, getAssociationRequests }}
         >
             {props.children}
-        </AssociatedUsersContext.Provider>
+        </UserAssociationRequestContext.Provider>
     )
 }

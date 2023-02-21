@@ -1,16 +1,21 @@
 import React, { useContext } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Feather from '@expo/vector-icons/Feather'
+import { Text } from 'native-base'
 // StackScreens
 import { FeedStackScreens } from './stacks/feedStack'
 import { ProfileStackScreens } from './stacks/profileStack'
-import { AssociatedUsersStackScreens } from './stacks/associatedUserStack'
+import { AssociatedUsersStackScreens } from './stacks/parentStacks/associatedUserStack'
 // Customs
 import { UserAuthContext } from '../hooks/contexts/UserAuthProvider'
-
 const AppTab = createBottomTabNavigator()
 export const AppNavigation = () => {
     const { accountType } = useContext(UserAuthContext)
+    if (!accountType) {
+        return <Text>Loading</Text>
+    }
+    console.log('ACCOUNT TYPE FROM CONTEXT: ' + accountType) // Necessary fro testing, sorry
+
     return (
         // Hiding Header of screens below
         <AppTab.Navigator
@@ -107,7 +112,11 @@ export const AppNavigation = () => {
                 />
             ) : null}
 
-            <AppTab.Screen name="Profile" component={ProfileStackScreens} />
+            <AppTab.Screen
+                name="Profile"
+                component={ProfileStackScreens}
+                initialParams={{ accountType: accountType }}
+            />
         </AppTab.Navigator>
     )
 }

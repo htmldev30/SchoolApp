@@ -2,8 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 // Screens
-import { AssociatedUserScreen } from '../../screens/parentScreens/AssociatedUserScreen'
-import { AssociatedUsersProvider } from '../../hooks/contexts/AssociatedUsersProvider'
+import { AssociatedUsersScreen } from '../../../screens/parentScreens/AssociatedUsersScreen'
 
 const AssociatedUsersStack = createStackNavigator()
 
@@ -13,7 +12,7 @@ export const AssociatedUsersStackScreens = () => {
         <AssociatedUsersStack.Navigator screenOptions={{ headerShown: false }}>
             <AssociatedUsersStack.Screen
                 name="AssociatedUsers"
-                component={AssociatedUserScreen}
+                component={AssociatedUsersScreen}
             />
         </AssociatedUsersStack.Navigator>
     )

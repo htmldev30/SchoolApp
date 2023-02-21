@@ -6,6 +6,7 @@ const verifyToken = require('./middlewares/authMiddleware')
 // Customs
 const userAssociateRouter = require('./routes/userAssociateRoutes')
 const userAuthRouter = require('./routes/userAuthRoutes')
+const userRouter = require('./routes/userRoutes')
 
 require('dotenv').config()
 const app = express()
@@ -24,6 +25,7 @@ db.once('open', () => {
 })
 //#endregion
 app.use('/v1/auth', userAuthRouter)
+app.use('/v1/user', userRouter)
 app.use('/v1/userAssociate', userAssociateRouter)
 
 app.get('/', verifyToken, (req, res) => {

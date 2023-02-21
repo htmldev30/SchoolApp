@@ -7,12 +7,14 @@ import axios from 'axios'
 import { axiosClient } from '../../../axiosClient'
 import { CustomButton } from '../../components/customButton'
 import { CustomInput } from '../../components/customInput'
-import { getUserJWTToken, getUserInfo } from '../../shared/asyncStorage'
+import { getUserInfo } from '../../shared/asyncStorage'
 
 export const AssociateUserForm = () => {
     const [userToAssociateEmail, setUserToAssociateEmail] = useState('')
     const handleSubmit = async () => {
         const userInfo = await getUserInfo()
+        console.log(userInfo)
+
         await axiosClient
             .post('/v1/userAssociate/requestAssociation', {
                 requesterEmail: userInfo.email,

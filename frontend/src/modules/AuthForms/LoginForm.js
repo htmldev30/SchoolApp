@@ -30,7 +30,6 @@ export const LoginForm = () => {
                     lastName: lastName,
                     email: email,
                 })
-                axiosClient.defaults.headers.common.Authorization = `Bearer ${jwtToken}`
 
                 // CHECK AuthenticationStatus function relies on JWTTOKEN being present or not present.
                 // Have JWT Token state change before checking!

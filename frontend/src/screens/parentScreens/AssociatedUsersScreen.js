@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react'
-import { Text, VStack, Box, Modal, Heading, Center } from 'native-base'
+import React, { useState } from 'react'
+import { VStack, Box, Modal, Heading } from 'native-base'
 import { CustomButton } from '../../components/customButton'
 import { AssociateUserForm } from '../../modules/AssociateUsersForms/AssociateUserForm'
 import { CustomAvatarWithBG } from '../../components/customAvatarWithBG'
 // Custom Imports
-export const AssociatedUserScreen = () => {
+export const AssociatedUsersScreen = () => {
     const [showModal, setShowModal] = useState(false)
     return (
         <Box flex="1" m="4" p="2" safeAreaTop>

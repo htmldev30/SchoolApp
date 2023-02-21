@@ -31,6 +31,10 @@ exports.getAssociationRequests = async (req, res) => {
             associationRequestUsersTemp.push({
                 associateRequestId: associationRequestId,
                 associationRequestUserEmail: associationRequestUsers[i].email,
+                associationRequestUserFullName: {
+                    firstName: associationRequestUsers[i].fullName.firstName,
+                    lastName: associationRequestUsers[i].fullName.lastName,
+                },
             })
         }
         res.status(200).send(associationRequestUsersTemp)

@@ -8,9 +8,7 @@ export const LandingScreen = ({ navigation }) => {
             <Heading>Welcome</Heading>
             <Box mt="24" p="2">
                 <Center>
-                    <Text fontSize="2xl" bold>
-                        SchoolApp
-                    </Text>
+                    <Text fontSize="2xl">SchoolApp</Text>
                     <Text fontSize="md">Wait... Who Are you?</Text>
                 </Center>
                 <VStack space={2} w="100%" pt="4" px="4">
