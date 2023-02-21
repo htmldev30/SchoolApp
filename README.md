@@ -8,8 +8,10 @@ Timeline for App Development
 
 ---
 
-**Feb. 19, 2023**
-
+**Feb. 20, 2023**
+- NIGHT UPDATE:
+- User Association UI Complete | ONLY GIVING Object ID Not USER INFO
+- MORNING:
 - User Auth State Management Complete
 - User Association Context Complete
 - Font Updates: Poppins and Lato
