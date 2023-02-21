@@ -6,6 +6,14 @@ Info: I am satisfying the required functionalities for the app while adding my o
 
 Timeline for App Development
 
+---
+
+**Feb. 19, 2023**
+
+- User Auth State Management Complete
+- User Association Context Complete
+- Font Updates: Poppins and Lato
+- NOTE TO SELF: SETUP AWS S3 FOR USER PROFILE PICTURE
 
 ---
 
