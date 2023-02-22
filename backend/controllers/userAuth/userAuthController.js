@@ -28,10 +28,11 @@ exports.userRegistration = async (req, res) => {
                 firstName: fullName.firstName,
                 lastName: fullName.lastName,
             },
-            associatedUsers: user.associatedUsers,
             email: lowerCasedEmail,
             password: hashedPassword,
         })
+
+        user.profilePicture = `https://api.dicebear.com/5.x/initials/svg?seed=${fullName.firstName}`
 
         // Information being stored in JWT Token
         const jwtToken = jwt.sign(
@@ -57,6 +58,7 @@ exports.userRegistration = async (req, res) => {
                 lastName: user.fullName.lastName,
             },
             email: user.email,
+            userProfile: user.profilePicture,
             associatedUsers: user.associatedUsers,
             jwtToken: user.jwtToken,
         })
@@ -94,14 +96,15 @@ exports.userLogin = async (req, res) => {
                     : console.log('Result: Login Successful')
             })
 
-            res.status(200).json({
+            res.status(201).json({
                 accountType: user.accountType,
                 fullName: {
                     firstName: user.fullName.firstName,
                     lastName: user.fullName.lastName,
                 },
-                associatedUsers: user.associatedUsers,
                 email: user.email,
+                userProfile: user.profilePicture,
+                associatedUsers: user.associatedUsers,
                 jwtToken: user.jwtToken,
             })
         }

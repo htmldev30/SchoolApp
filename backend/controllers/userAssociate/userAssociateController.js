@@ -1,6 +1,5 @@
 const userModel = require('../../models/userSchema')
 const associateRequestModel = require('../../models/associateRequestSchema')
-
 exports.getAssociationRequests = async (req, res) => {
     try {
         const { recipientEmail } = req.body

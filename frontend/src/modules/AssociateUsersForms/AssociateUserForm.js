@@ -22,7 +22,6 @@ export const AssociateUserForm = () => {
                 recipientEmail: userToAssociateEmail,
             })
             .then((res) => {
-                console.log('HELLO WORLD')
                 setMessages(res.response)
             })
             .catch((err) => {

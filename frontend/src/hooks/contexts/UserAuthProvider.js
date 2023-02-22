@@ -12,7 +12,6 @@ export const UserAuthProvider = (props) => {
     const [accountType, setAccountType] = useState(null)
     useEffect(() => {
         checkAuthenticationStatus()
-        getUserInfoFromServer()
     }, [isAuthenticated]) // when authentication status changes, useEffect will run again
 
     const checkAuthenticationStatus = async () => {
@@ -29,23 +28,6 @@ export const UserAuthProvider = (props) => {
         }
     }
 
-    const getUserInfoFromServer = async () => {
-        const userJWTToken = await getUserJWTToken()
-        const userInfo = await getUserInfo()
-        if (userJWTToken && userInfo) {
-            await axiosClient
-                .post('/v1/user/getAssociatedUsersInfo', {
-                    recipientEmail: userInfo.email,
-                })
-                .then((res) => {
-                    console.log(res.data)
-                    // storeUserInfo(res.data)
-                })
-                .catch((err) => {
-                    console.log(err.response.data.error)
-                })
-        }
-    }
     return (
         <UserAuthContext.Provider
             value={{

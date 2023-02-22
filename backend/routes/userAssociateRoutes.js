@@ -19,4 +19,5 @@ userAssociateRouter.put(
     verifyToken,
     userAssociateController.verifyAssociation,
 )
+
 module.exports = userAssociateRouter

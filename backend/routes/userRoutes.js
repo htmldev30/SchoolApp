@@ -8,5 +8,9 @@ userRouter.post(
     verifyToken,
     userController.getAssociatedUsersInfo,
 )
-
+userRouter.post(
+    '/getAssociatedUsersInfo',
+    verifyToken,
+    userController.getAssociatedUsersInfo,
+)
 module.exports = userRouter

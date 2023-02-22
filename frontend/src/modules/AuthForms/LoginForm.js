@@ -23,6 +23,7 @@ export const LoginForm = () => {
                     accountType,
                     fullName,
                     email,
+                    userProfile,
                     associatedUsers,
                     jwtToken,
                 } = res.data
@@ -35,6 +36,7 @@ export const LoginForm = () => {
                     },
                     associatedUsers: associatedUsers,
                     email: email,
+                    userProfile: userProfile,
                 })
 
                 // CHECK AuthenticationStatus function relies on JWTTOKEN being present or not present.

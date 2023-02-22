@@ -29,7 +29,14 @@ export const ParentStudentAuthForm = ({ userAccountType }) => {
                 password: password,
             })
             .then((res) => {
-                const { accountType, fullName, email, jwtToken } = res.data
+                const {
+                    accountType,
+                    fullName,
+                    email,
+                    userProfile,
+                    associatedUsers,
+                    jwtToken,
+                } = res.data
                 storeUserJWTToken(jwtToken)
                 storeUserInfo({
                     accountType: accountType,
@@ -38,6 +45,8 @@ export const ParentStudentAuthForm = ({ userAccountType }) => {
                         lastName: fullName.lastName,
                     },
                     email: email,
+                    associatedUsers: associatedUsers,
+                    userProfile: userProfile,
                 })
 
                 // CHECK AuthenticationStatus function relies on JWTTOKEN being present or not present.

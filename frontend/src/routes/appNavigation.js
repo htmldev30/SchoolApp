@@ -11,10 +11,10 @@ import { UserAuthContext } from '../hooks/contexts/UserAuthProvider'
 const AppTab = createBottomTabNavigator()
 export const AppNavigation = () => {
     const { accountType } = useContext(UserAuthContext)
+
     if (!accountType) {
         return <Text>Loading</Text>
     }
-    console.log('ACCOUNT TYPE FROM CONTEXT: ' + accountType) // Necessary fro testing, sorry
 
     return (
         // Hiding Header of screens below
@@ -109,13 +109,18 @@ export const AppNavigation = () => {
                 <AppTab.Screen
                     name="My Students"
                     component={AssociatedUsersStackScreens}
+                    initialParams={{
+                        accountType: accountType,
+                    }}
                 />
             ) : null}
 
             <AppTab.Screen
                 name="Profile"
                 component={ProfileStackScreens}
-                initialParams={{ accountType: accountType }}
+                initialParams={{
+                    accountType: accountType,
+                }}
             />
         </AppTab.Navigator>
     )

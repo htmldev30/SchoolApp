@@ -8,6 +8,7 @@ import { NativeBaseProvider, extendTheme } from 'native-base'
 import { UserAuthProvider } from './src/hooks/contexts/UserAuthProvider'
 // Customs
 import Index from './index'
+import { UserDynamicInfoProvider } from './src/hooks/contexts/UserDynamicInfoProvider'
 
 export default function App() {
     let [fontsLoaded] = useFonts({
@@ -228,7 +229,9 @@ export default function App() {
     return (
         <NativeBaseProvider theme={theme}>
             <UserAuthProvider>
-                <Index />
+                <UserDynamicInfoProvider>
+                    <Index />
+                </UserDynamicInfoProvider>
             </UserAuthProvider>
         </NativeBaseProvider>
     )

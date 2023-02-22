@@ -3,7 +3,7 @@ import { Box, Center, Text } from 'native-base'
 // Customs
 import { CustomAvatar } from './customAvatar'
 export const CustomAvatarWithBG = ({
-    associatedUserName,
+    associatedUserFullName,
     associatedUserGrade,
     associatedUserImageSource,
 }) => {
@@ -14,7 +14,8 @@ export const CustomAvatarWithBG = ({
                 <Box>
                     <Center>
                         <Text fontSize="2xl" mt={5}>
-                            {associatedUserName}
+                            {associatedUserFullName.firstName}
+                            {associatedUserFullName.lastName}
                         </Text>
                         <Text fontSize="lg">{associatedUserGrade}</Text>
                     </Center>

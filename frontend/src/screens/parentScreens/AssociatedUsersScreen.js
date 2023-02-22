@@ -4,19 +4,11 @@ import { Box, Modal, Heading, Flex, IconButton, ScrollView } from 'native-base'
 import { AssociateUserForm } from '../../modules/AssociateUsersForms/AssociateUserForm'
 import { CustomAvatarWithBG } from '../../components/customAvatarWithBG'
 import { Feather } from '@expo/vector-icons'
-import { getUserInfo } from '../../shared/asyncStorage'
 
 // Custom Imports
-export const AssociatedUsersScreen = () => {
+export const AssociatedUsersScreen = ({ route }) => {
     const [showModal, setShowModal] = useState(false)
-    const [associatedUsers, setAssociatedUsers] = useState(null)
-    useEffect(() => {
-        getAssociatedUsers()
-    }, [])
-    const getAssociatedUsers = async () => {
-        const { associatedUsers } = await getUserInfo()
-        setAssociatedUsers(associatedUsers)
-    }
+    const associatedUsers = route.params.associatedUsers
     return (
         <Box flex="1" m="4" p="2" safeAreaTop>
             <Flex direction={'row'} justifyContent="space-between">
@@ -36,14 +28,21 @@ export const AssociatedUsersScreen = () => {
                 />
             </Flex>
             <ScrollView showsVerticalScrollIndicator={false}>
-                {associatedUsers.map((associatedUser, index) => {
-                    return (
-                        <CustomAvatarWithBG
-                            key={index}
-                            associatedUserName={associatedUser}
-                        />
-                    )
-                })}
+                {associatedUsers
+                    ? associatedUsers.map((associatedUser, index) => {
+                          return (
+                              <CustomAvatarWithBG
+                                  key={index}
+                                  associatedUserImageSource={
+                                      associatedUser.profilePicture
+                                  }
+                                  associatedUserFullName={
+                                      associatedUser.fullName
+                                  }
+                              />
+                          )
+                      })
+                    : null}
             </ScrollView>
 
             <Modal
