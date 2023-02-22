@@ -8,6 +8,14 @@ Timeline for App Development
 
 ---
 
+**Feb. 21, 2023**
+
+- User Association UI for Parent Setup
+- Context Setup for Any User Info Changes
+- User Profile Incorporation | TODO: INCLUDE AWS S3 to store user uploaded images
+
+---
+
 **Feb. 20, 2023**
 - NIGHT UPDATE:
 - User Association UI Complete | ONLY GIVING Object ID Not USER INFO
