@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { VStack, Icon } from 'native-base'
 import { Feather } from '@expo/vector-icons'
-import axios from 'axios'
 // Custom Imports
 import { UserAuthContext } from '../../hooks/contexts/UserAuthProvider'
 import { axiosClient } from '../../../axiosClient'

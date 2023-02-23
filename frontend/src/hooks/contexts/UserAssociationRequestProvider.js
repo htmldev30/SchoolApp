@@ -15,7 +15,7 @@ export const UserAssociationRequestProvider = (props) => {
 
     const getAssociationRequests = async () => {
         const userInfo = await getUserInfo()
-        // Because provider wraps around entire ProfileStack, if user is a parent, do not request API
+        // Because provider wraps around entire ProfileStack (for notif bell count), if user is a parent, do not request API |
         if (userInfo.accountType == 'parent') {
             return null
         }

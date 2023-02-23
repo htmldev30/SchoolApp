@@ -4,12 +4,13 @@ import React, { createContext, useState, useEffect } from 'react'
 import { axiosClient } from '../../../axiosClient'
 import { getUserJWTToken, getUserInfo } from '../../shared/asyncStorage'
 
-export const UserDynamicInfoContext = createContext()
+export const UserDynamicInfoContext = createContext(null)
 
 export const UserDynamicInfoProvider = (props) => {
     const [userDynamicInfo, setUserDynamicInfo] = useState() // will include user, profilePicture, fullName, etc (i.e. any info that is regularly updated)
-    const [associatedUsers, setAssociatedUsers] = useState()
+    const [associatedUsers, setAssociatedUsers] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
+
     useEffect(() => {
         getAssociatedUsers()
     }, [isLoading])
@@ -31,7 +32,6 @@ export const UserDynamicInfoProvider = (props) => {
             setIsLoading(false)
         }
     }
-
     return (
         <UserDynamicInfoContext.Provider
             value={{ associatedUsers, getAssociatedUsers }}

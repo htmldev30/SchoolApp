@@ -9,7 +9,7 @@ import { CustomButton } from '../../components/customButton'
 import { CustomInput } from '../../components/customInput'
 import { getUserInfo } from '../../shared/asyncStorage'
 
-export const AssociateUserForm = () => {
+export const AssociateUserForm = ({ setShowModal }) => {
     const [userToAssociateEmail, setUserToAssociateEmail] = useState('')
     const [messages, setMessages] = useState(null)
 
@@ -23,6 +23,7 @@ export const AssociateUserForm = () => {
             })
             .then((res) => {
                 setMessages(res.response)
+                setShowModal(false)
             })
             .catch((err) => {
                 setMessages(err.response.data.error)

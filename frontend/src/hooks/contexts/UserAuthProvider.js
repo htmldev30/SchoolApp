@@ -17,6 +17,7 @@ export const UserAuthProvider = (props) => {
     const checkAuthenticationStatus = async () => {
         const userJWTToken = await getUserJWTToken()
         const userInfo = await getUserInfo()
+
         if (userJWTToken && userInfo) {
             setIsAuthenticated(true)
             setAccountType(userInfo.accountType)

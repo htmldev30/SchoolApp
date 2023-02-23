@@ -8,6 +8,12 @@ Timeline for App Development
 
 ---
 
+**Feb. 22, 2023**
+
+- User Association Context Additional Fixes 
+- User Profile Picture Fix With Initials
+- TODO: Fix user association context issue where associated users are updated automatically
+
 **Feb. 21, 2023**
 
 - User Association UI for Parent Setup

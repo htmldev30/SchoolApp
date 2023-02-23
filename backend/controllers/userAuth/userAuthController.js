@@ -50,7 +50,6 @@ exports.userRegistration = async (req, res) => {
                 ? console.log('Error: ', err)
                 : console.log('Result: User Registration Successful')
         })
-        console.log(user.associatedUsers)
         res.status(201).json({
             accountType: user.accountType,
             fullName: {

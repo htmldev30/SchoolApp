@@ -55,7 +55,7 @@ export const AssociatedUsersScreen = ({ route }) => {
                     <Modal.CloseButton />
                     <Modal.Header>Add Your Students</Modal.Header>
                     <Modal.Body>
-                        <AssociateUserForm />
+                        <AssociateUserForm setShowModal={setShowModal} />
                     </Modal.Body>
                 </Modal.Content>
             </Modal>

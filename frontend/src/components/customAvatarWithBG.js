@@ -10,12 +10,14 @@ export const CustomAvatarWithBG = ({
     return (
         <Box mt={5}>
             <Center bg="custom_secondary.400" height={200} borderRadius={8}>
-                <CustomAvatar imgSource={associatedUserImageSource} />
+                <CustomAvatar
+                    imgSource={associatedUserImageSource}
+                    associatedUserFullName={associatedUserFullName}
+                />
                 <Box>
                     <Center>
                         <Text fontSize="2xl" mt={5}>
-                            {associatedUserFullName.firstName}
-                            {associatedUserFullName.lastName}
+                            {`${associatedUserFullName.firstName} ${associatedUserFullName.lastName}`}
                         </Text>
                         <Text fontSize="lg">{associatedUserGrade}</Text>
                     </Center>

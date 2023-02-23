@@ -15,7 +15,6 @@ exports.getAssociatedUsersInfo = async (req, res) => {
     try {
         const { userEmail } = req.body
         const user = await userModel.findOne({ email: userEmail })
-
         // returns all users, user is associated with (i.e all students of a parent)
         if (user.associatedUsers.length > 0) {
             associatedUsers = await userModel.find(
@@ -28,7 +27,6 @@ exports.getAssociatedUsersInfo = async (req, res) => {
                 },
             )
         }
-        console.log(associatedUsers)
         res.status(200).json(associatedUsers)
     } catch (err) {
         res.status(500).send({

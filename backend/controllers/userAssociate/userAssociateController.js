@@ -52,6 +52,10 @@ exports.requestAssociation = async (req, res) => {
         if (!recipient) {
             throw new Error('Recipient Does Not Exist.')
         }
+
+        if (requester._id.equals(recipient._id)) {
+            throw new Error('You cannot associate yourself.')
+        }
         // Users that are not of "parent" accountType cannot associate accounts under them.
         if (requester.accountType !== 'parent') {
             throw new Error(

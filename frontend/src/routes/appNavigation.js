@@ -8,12 +8,13 @@ import { ProfileStackScreens } from './stacks/profileStack'
 import { AssociatedUsersStackScreens } from './stacks/parentStacks/associatedUserStack'
 // Customs
 import { UserAuthContext } from '../hooks/contexts/UserAuthProvider'
+import { IsLoadingSplash } from '../components/isLoadingSplash'
 const AppTab = createBottomTabNavigator()
 export const AppNavigation = () => {
     const { accountType } = useContext(UserAuthContext)
 
     if (!accountType) {
-        return <Text>Loading</Text>
+        return <IsLoadingSplash />
     }
 
     return (

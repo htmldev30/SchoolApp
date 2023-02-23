@@ -5,15 +5,18 @@ import { Text } from 'native-base'
 import { AssociatedUsersScreen } from '../../../screens/parentScreens/AssociatedUsersScreen'
 // Customs
 import { UserDynamicInfoContext } from '../../../hooks/contexts/UserDynamicInfoProvider'
+import { IsLoadingSplash } from '../../../components/isLoadingSplash'
 
 const AssociatedUsersStack = createStackNavigator()
 
 export const AssociatedUsersStackScreens = () => {
-    const { associatedUsers } = useContext(UserDynamicInfoContext)
+    const { associatedUsers, getAssociatedUsers } = useContext(
+        UserDynamicInfoContext
+    )
     if (!associatedUsers) {
-        return <Text>Loading</Text>
+        getAssociatedUsers() // calling this func. to make useEffect load again |
+        return <IsLoadingSplash />
     }
-    // ABOVE CODE DELETED BECAUSE IT IS UNNECESSARY, check tommorrow
     return (
         // Wrap NavigationStack around AssociatedUsers | Only AssociatedUserStack
         <AssociatedUsersStack.Navigator screenOptions={{ headerShown: false }}>

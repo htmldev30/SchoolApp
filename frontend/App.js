@@ -2,8 +2,9 @@ import 'react-native-gesture-handler' // As per documentation, goes at very top
 import React from 'react'
 // UI
 import { useFonts } from 'expo-font'
-import * as SplashScreen from 'expo-splash-screen'
 import { NativeBaseProvider, extendTheme } from 'native-base'
+import { StatusBar } from 'expo-status-bar'
+
 // Contexts
 import { UserAuthProvider } from './src/hooks/contexts/UserAuthProvider'
 // Customs
@@ -230,6 +231,7 @@ export default function App() {
         <NativeBaseProvider theme={theme}>
             <UserAuthProvider>
                 <UserDynamicInfoProvider>
+                    <StatusBar style="dark" />
                     <Index />
                 </UserDynamicInfoProvider>
             </UserAuthProvider>

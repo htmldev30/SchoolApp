@@ -34,16 +34,7 @@ export const AssociationRequestsScreen = () => {
                                   justifyContent="space-between"
                               >
                                   <Text>
-                                      {
-                                          associationRequest
-                                              .associationRequestUserFullName
-                                              .firstName
-                                      }
-                                      {
-                                          associationRequest
-                                              .associationRequestUserFullName
-                                              .lastName
-                                      }
+                                      {`${associationRequest.associationRequestUserFullName.firstName} ${associationRequest.associationRequestUserFullName.lastName}`}
                                   </Text>
                                   <AssociateUserAcceptRejectForm
                                       associateRequestId={
