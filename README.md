@@ -1,4 +1,6 @@
-# SchoolApp (for FBLA competition)
+![EduConnect](https://drive.google.com/uc?id=19aGT2LfaGyj1UrQcaRIPzgUwfTkpmWS5)
+
+# SchoolApp (Edit: Officially Called, EduConnect) (for FBLA competition)
 
 ### Mohammed Hit (Programmer) and Haylie Romero (UI Designer & Artist)
 
