@@ -1,4 +1,4 @@
-<img src="https://drive.google.com/uc?id=19aGT2LfaGyj1UrQcaRIPzgUwfTkpmWS5" width="300px" height: "100px"/>
+![EduConnect](https://drive.google.com/uc?id=1RgHcsb1VSVuOc_kh9X05NzW27gz9LF0J)
 
 # SchoolApp (Edit: Officially Called, EduConnect) (for FBLA competition)
 
