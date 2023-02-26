@@ -8,8 +8,15 @@ export const CustomAvatarWithBG = ({
     associatedUserImageSource,
 }) => {
     return (
-        <Box mt={5}>
-            <Center bg="custom_secondary.400" height={200} borderRadius={8}>
+        <Box
+            mt={5}
+            bg="custom_secondary.400"
+            borderRadius={8}
+            borderWidth={4}
+            borderColor="custom_secondary.500"
+            shadow={2}
+        >
+            <Center height={200}>
                 <CustomAvatar
                     imgSource={associatedUserImageSource}
                     associatedUserFullName={associatedUserFullName}

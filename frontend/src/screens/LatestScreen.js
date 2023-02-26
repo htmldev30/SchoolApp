@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Text, Heading, Box } from 'native-base'
 import { getUserInfo } from '../shared/asyncStorage'
-import { CustomButton } from '../components/customButton'
+import { CustomCard } from '../components/customCard'
 // Custom Imports
 
 export const LatestScreen = () => {
@@ -17,6 +17,7 @@ export const LatestScreen = () => {
         <Box flex="1" m="4" p="2" safeAreaTop>
             <Text>The User Is A </Text>
             <Heading>{accountType}</Heading>
+            <CustomCard />
         </Box>
     )
 }
