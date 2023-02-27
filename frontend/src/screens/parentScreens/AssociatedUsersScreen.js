@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Modal, Heading, Flex, IconButton, ScrollView } from 'native-base'
+import {
+    Box,
+    Modal,
+    Heading,
+    Flex,
+    IconButton,
+    ScrollView,
+    Text,
+} from 'native-base'
 // Customs
 import { AssociateUserForm } from '../../modules/AssociateUsersForms/AssociateUserForm'
 import { CustomAvatarWithBG } from '../../components/customAvatarWithBG'
@@ -9,6 +17,7 @@ import { Feather } from '@expo/vector-icons'
 export const AssociatedUsersScreen = ({ route }) => {
     const [showModal, setShowModal] = useState(false)
     const associatedUsers = route.params.associatedUsers
+    const resMessages = route.params.resMessages
     return (
         <Box flex="1" m="4" p="2" safeAreaTop>
             <Flex direction={'row'} justifyContent="space-between">
@@ -28,13 +37,14 @@ export const AssociatedUsersScreen = ({ route }) => {
                 />
             </Flex>
             <ScrollView showsVerticalScrollIndicator={false}>
+                <Text>{resMessages}</Text>
                 {associatedUsers
                     ? associatedUsers.map((associatedUser, index) => {
                           return (
                               <CustomAvatarWithBG
                                   key={index}
                                   associatedUserImageSource={
-                                      associatedUser.profilePicture
+                                      associatedUser.avatarUrl
                                   }
                                   associatedUserFullName={
                                       associatedUser.fullName

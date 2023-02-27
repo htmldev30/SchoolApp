@@ -4,8 +4,17 @@ import { Feather } from '@expo/vector-icons'
 // Custom Imports
 import { LogoutForm } from '../modules/AuthForms/LogoutForm'
 import { UserAssociationRequestContext } from '../hooks/contexts/UserAssociationRequestProvider'
-
+import { UserDynamicInfoContext } from '../hooks/contexts/UserDynamicInfoProvider'
+import { CustomAvatarWithBG } from '../components/customAvatarWithBG'
+import { IsLoadingSplash } from '../components/isLoadingSplash'
 export const AccountScreen = ({ navigation, route }) => {
+    const { userDynamicInfo, getUserDynamicInfo } = useContext(
+        UserDynamicInfoContext
+    )
+    if (!userDynamicInfo) {
+        getUserDynamicInfo()
+        return <IsLoadingSplash />
+    }
     const numAssociationRequests = () => {
         const { associationRequests } = useContext(
             UserAssociationRequestContext
@@ -39,14 +48,19 @@ export const AccountScreen = ({ navigation, route }) => {
         }
     }
 
+    console.log(userDynamicInfo)
     return (
         <Box flex="1" m="4" p="2" safeAreaTop>
             <Flex direction={'row'} justifyContent="space-between">
-                <Heading>Account Screen</Heading>
+                <Heading>My Profile</Heading>
                 {route.params.accountType == 'student'
                     ? numAssociationRequests()
                     : null}
             </Flex>
+            <CustomAvatarWithBG
+                associatedUserFullName={userDynamicInfo.fullName}
+                associatedUserImageSource={userDynamicInfo.avatarUrl}
+            />
 
             <LogoutForm />
         </Box>

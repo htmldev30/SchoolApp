@@ -15,7 +15,7 @@ app.use(express.json())
 
 //#region Mongo Connection
 // Dev Note: DO NOT USE 'localhost" instead use following below
-mongoose.connect('mongodb://127.0.0.1:27017/schoolapp', {
+mongoose.connect('mongodb://127.0.0.1:27017/educonnect', {
     useNewUrlParser: true,
 })
 const db = mongoose.connection

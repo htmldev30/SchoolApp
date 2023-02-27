@@ -10,7 +10,7 @@ export const LoginScreen = () => {
             <Box mt="24" p="2">
                 <Center>
                     <Text fontSize="2xl" bold>
-                        SchoolApp
+                        EduConnect
                     </Text>
                     <LoginForm />
                 </Center>

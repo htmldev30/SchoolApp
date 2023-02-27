@@ -63,6 +63,9 @@ exports.requestAssociation = async (req, res) => {
             )
         }
 
+        if (recipient.accountType == 'parent') {
+            throw new Error('Parents cannot associate with other parent users.')
+        }
         requester.associatedUsers.forEach((associatedUser) => {
             if (associatedUser.equals(recipient._id)) {
                 throw new Error('Users Already Associated.')

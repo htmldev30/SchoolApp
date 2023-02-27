@@ -9,7 +9,7 @@ export const FacultyAuth1Screen = ({ navigation }) => {
             <Box mt="24" p="2">
                 <Center>
                     <Text fontSize="2xl" bold>
-                        SchoolApp
+                        EduConnect
                     </Text>
                     <Text fontSize="md">Faculty</Text>
                 </Center>

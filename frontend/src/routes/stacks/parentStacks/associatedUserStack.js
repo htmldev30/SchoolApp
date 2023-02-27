@@ -10,10 +10,10 @@ import { IsLoadingSplash } from '../../../components/isLoadingSplash'
 const AssociatedUsersStack = createStackNavigator()
 
 export const AssociatedUsersStackScreens = () => {
-    const { associatedUsers, getAssociatedUsers } = useContext(
+    const { associatedUsers, getAssociatedUsers, resMessages } = useContext(
         UserDynamicInfoContext
     )
-    if (!associatedUsers) {
+    if (!associatedUsers && !resMessages) {
         getAssociatedUsers() // calling this func. to make useEffect load again |
         return <IsLoadingSplash />
     }
@@ -25,6 +25,7 @@ export const AssociatedUsersStackScreens = () => {
                 component={AssociatedUsersScreen}
                 initialParams={{
                     associatedUsers: associatedUsers,
+                    resMessages: resMessages,
                 }}
             />
         </AssociatedUsersStack.Navigator>

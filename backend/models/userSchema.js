@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
     jwtToken: {
         type: String,
     },
-    profilePicture: {
+    avatar: {
         default: 'https://api.dicebear.com/5.x/initials/svg?seed=Felix',
         type: String,
     },
