@@ -12,6 +12,14 @@ Timeline for App Development
 
 ---
 
+**Feb. 26, 2023**
+
+- AWS S3 Bucket Setup for User Avatars
+- Fixes to context and state 
+- Todo: Allow image uploads directly from app
+
+---
+
 **Feb. 22, 2023**
 
 - User Association Context Additional Fixes 
