@@ -21,7 +21,6 @@ export const UserDynamicInfoProvider = (props) => {
     const getAssociatedUsers = async () => {
         const userJWTToken = await getUserJWTToken()
         const userInfo = await getUserInfo()
-        console.log('IN')
         if (userJWTToken && userInfo) {
             await axiosClient
                 .post('/v1/user/getAssociatedUsersInfo', {

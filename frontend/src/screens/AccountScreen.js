@@ -8,13 +8,6 @@ import { UserDynamicInfoContext } from '../hooks/contexts/UserDynamicInfoProvide
 import { CustomAvatarWithBG } from '../components/customAvatarWithBG'
 import { IsLoadingSplash } from '../components/isLoadingSplash'
 export const AccountScreen = ({ navigation, route }) => {
-    const { userDynamicInfo, getUserDynamicInfo } = useContext(
-        UserDynamicInfoContext
-    )
-    if (!userDynamicInfo) {
-        getUserDynamicInfo()
-        return <IsLoadingSplash />
-    }
     const numAssociationRequests = () => {
         const { associationRequests } = useContext(
             UserAssociationRequestContext
@@ -48,7 +41,6 @@ export const AccountScreen = ({ navigation, route }) => {
         }
     }
 
-    console.log(userDynamicInfo)
     return (
         <Box flex="1" m="4" p="2" safeAreaTop>
             <Flex direction={'row'} justifyContent="space-between">
@@ -57,10 +49,7 @@ export const AccountScreen = ({ navigation, route }) => {
                     ? numAssociationRequests()
                     : null}
             </Flex>
-            <CustomAvatarWithBG
-                associatedUserFullName={userDynamicInfo.fullName}
-                associatedUserImageSource={userDynamicInfo.avatarUrl}
-            />
+            <CustomAvatarWithBG />
 
             <LogoutForm />
         </Box>
