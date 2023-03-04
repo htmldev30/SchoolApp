@@ -12,6 +12,14 @@ Timeline for App Development
 
 ---
 
+**Feb. 28 to March. 3, 2023**
+
+- Rewrote backend in TypeScript. See "typescript" branch
+- Setup working authentication for backend for TypeScript
+- Extension of Request for user info
+
+---
+
 **Feb. 26, 2023**
 
 - AWS S3 Bucket Setup for User Avatars
@@ -25,6 +33,8 @@ Timeline for App Development
 - User Association Context Additional Fixes 
 - User Profile Picture Fix With Initials
 - TODO: Fix user association context issue where associated users are updated automatically
+
+--- 
 
 **Feb. 21, 2023**
 
