@@ -4,6 +4,9 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 // Routes
 import userAuthRouter from './routes/userAuthRoutes'
+import facultyRouter from './routes/faculty/facultyRoutes'
+import userAssociationRouter from './routes/userAssociationRoutes'
+import postRouter from './routes/postRoutes'
 // Initializations
 const app: Application = express()
 app.use(cors())
@@ -18,11 +21,12 @@ db.once('open', () => {
 //#endregion
 
 app.use('/v1/auth', userAuthRouter)
+app.use('/v1/userAssociation', userAssociationRouter)
+app.use('/v1/posts', postRouter)
+app.use('/v1/faculty', facultyRouter)
 
 const PORT: any = process.env.PORT
 const SERVER: any = process.env.SERVER
 app.listen(PORT, () => {
-    console.log(
-        `Server is listening on ${process.env.SERVER}:${process.env.PORT}`,
-    )
+    console.log(`Server is listening on 127.0.0.1:${process.env.PORT}`)
 })

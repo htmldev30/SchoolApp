@@ -1,9 +1,8 @@
-import mongoose from 'mongoose'
-import { Schema, Types } from 'mongoose'
-interface IAssociationRequest {
+import mongoose, { Document, Schema, Types } from 'mongoose'
+interface IAssociationRequest extends Document {
     requester: Types.ObjectId
     recipient: Types.ObjectId
-    status: string
+    status: 'accept' | 'reject' | 'pending'
 }
 
 const associationRequestSchema = new mongoose.Schema<IAssociationRequest>({
@@ -19,12 +18,16 @@ const associationRequestSchema = new mongoose.Schema<IAssociationRequest>({
     },
     status: {
         type: String,
+        enum: {
+            values: ['accept', 'reject', 'pending'],
+            message: 'Unexpected request action.',
+        },
         required: true,
     },
 })
 
-const AssociationRequest = mongoose.model<IAssociationRequest>(
+const associationRequestModel = mongoose.model<IAssociationRequest>(
     'AssociationRequest',
     associationRequestSchema,
 )
-export default AssociationRequest
+export default associationRequestModel

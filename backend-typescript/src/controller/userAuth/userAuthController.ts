@@ -1,36 +1,16 @@
 require('dotenv').config()
 import { Request, Response } from 'express'
-import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import userModel from '../models/userSchema'
-import { getErrorMessage } from '../utils/errorMessage'
+import userModel from '../../models/userSchema'
+import { getErrorMessage } from '../../utils/errorMessage'
+import {
+    IUserAuthRes,
+    IUserRegistrationReqBody,
+    IUserLoginReqBody,
+} from '../../utils/userAuthInterfaces'
+import { jwtSign } from '../../utils/jwtSign'
+import schoolModel from '../../models/schoolSchema'
 
-const JWT_SECRET_KEY: string | any = process.env.JWT_SECRET_KEY
-
-interface IUserRegistrationReqBody {
-    accountType: string
-    fullName: {
-        firstName: string
-        lastName: string
-    }
-    email: string
-    password: string
-}
-interface IUserRegistrationResBody {
-    accountType: string
-    fullName: {
-        firstName: string
-        lastName: string
-    }
-    email: string
-    password: string
-    associatedUsers: []
-    jwtToken: string
-}
-interface IUserLoginReqBody {
-    email: string
-    password: string
-}
 export const userRegistration = async (req: Request, res: Response) => {
     try {
         const {
@@ -38,6 +18,7 @@ export const userRegistration = async (req: Request, res: Response) => {
             fullName,
             email,
             password,
+            joinCode,
         }: IUserRegistrationReqBody = req.body
         const lowerCasedEmail: string = email.toLowerCase()
         // check if a user already exists
@@ -49,6 +30,12 @@ export const userRegistration = async (req: Request, res: Response) => {
             })
         }
 
+        const school = await schoolModel.findOne({ joinCode: joinCode })
+        if (!school) {
+            return res.status(404).send({
+                message: 'Could not find a school to associate with.',
+            })
+        }
         const user = new userModel({
             accountType: accountType,
             fullName: {
@@ -57,32 +44,32 @@ export const userRegistration = async (req: Request, res: Response) => {
             },
             email: lowerCasedEmail,
             password: password,
+            school: school._id, // in case school is null
         })
 
         // Information being stored in JWT Token
-        const jwtToken = jwt.sign(
-            {
-                accountType: accountType,
-                email: lowerCasedEmail,
-                user_id: user._id,
-            },
-            JWT_SECRET_KEY,
-            {
-                expiresIn: '2h',
-            },
-        )
-        user.jwtToken = jwtToken
-        user.save()
-        res.status(201).json({
+        user.jwtToken = jwtSign({
             accountType: user.accountType,
+            username: lowerCasedEmail.slice(0, lowerCasedEmail.indexOf('@')),
+            user_id: user._id,
+        })
+
+        await user.save() // await so field invalid errors get returned
+        const userAuthRes: IUserAuthRes = {
+            accountType: user.accountType,
+            grade: user.grade ? user.grade : null,
             fullName: {
                 firstName: user.fullName.firstName,
                 lastName: user.fullName.lastName,
             },
+            username: user.username,
             email: user.email,
+            avatarName: user.avatarName,
             associatedUsers: user.associatedUsers,
+            school: user.school,
             jwtToken: user.jwtToken,
-        })
+        }
+        res.status(201).json(userAuthRes)
     } catch (error) {
         res.status(500).send(getErrorMessage(error))
     }
@@ -105,29 +92,28 @@ export const userLogin = async (req: Request, res: Response) => {
 
         const passwordValid = await bcrypt.compare(password, user.password)
         if (passwordValid) {
-            const jwtToken = jwt.sign(
-                {
-                    accountType: user.accountType,
-                    email: user.email,
-                    user_id: user._id,
-                },
-                JWT_SECRET_KEY,
-                {
-                    expiresIn: '2h',
-                },
-            )
-            user.jwtToken = jwtToken
-            user.save()
-            res.status(201).json({
+            user.jwtToken = jwtSign({
                 accountType: user.accountType,
+                username: user.username,
+                user_id: user._id,
+            })
+
+            user.save()
+            const userAuthRes: IUserAuthRes = {
+                accountType: user.accountType,
+                grade: user.grade ? user.grade : null,
                 fullName: {
                     firstName: user.fullName.firstName,
                     lastName: user.fullName.lastName,
                 },
+                username: user.username,
                 email: user.email,
+                avatarName: user.avatarName,
                 associatedUsers: user.associatedUsers,
+                school: user.school,
                 jwtToken: user.jwtToken,
-            })
+            }
+            res.status(201).json(userAuthRes)
         } else {
             throw new Error('Your credentials are incorrect.')
         }

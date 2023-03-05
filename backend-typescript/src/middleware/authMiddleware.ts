@@ -19,10 +19,10 @@ export const verifyToken = async (
         }
         const jwtToken = authorizationHeader.split(' ')[1]
         const decodedUser = jwt.verify(jwtToken, JWT_SECRET_KEY) as JwtPayload
-        const { accountType, email, user_id } = decodedUser
+        const { accountType, username, user_id } = decodedUser
         req.user = {
             accountType: accountType,
-            email: email,
+            username: username,
             user_id: user_id,
         }
         return next()

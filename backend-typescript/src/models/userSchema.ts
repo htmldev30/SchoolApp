@@ -1,22 +1,34 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema, Types } from 'mongoose'
+
 import bcrypt from 'bcrypt'
 
 interface IUser {
-    accountType: string
+    accountType: 'parent' | 'student' | 'teacher'
+    grade?: number
     fullName: {
         firstName: string
         lastName: string
     }
+    username: string
     email: string
     password: string
     avatarName: string
     jwtToken: string
-    associatedUsers: []
+    associatedUsers: Types.ObjectId[] // change later
+    school: Types.ObjectId
 }
 
 const saltRounds = 10
 const userSchema = new mongoose.Schema<IUser>({
-    accountType: { type: String, required: true },
+    accountType: {
+        type: String,
+        enum: {
+            values: ['parent', 'student', 'teacher'],
+            message: 'Invalid Account Type',
+        },
+        required: true,
+    },
+    grade: { type: Number, required: false },
     fullName: {
         firstName: {
             type: String,
@@ -27,6 +39,7 @@ const userSchema = new mongoose.Schema<IUser>({
             required: true,
         },
     },
+    username: { type: String, required: true, unique: true },
     email: {
         type: String,
         lowercase: true,
@@ -45,6 +58,11 @@ const userSchema = new mongoose.Schema<IUser>({
         type: String,
     },
     associatedUsers: [],
+    school: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'School',
+    },
 })
 
 userSchema.pre('save', async function (next: Function) {
@@ -52,6 +70,12 @@ userSchema.pre('save', async function (next: Function) {
     if (user.isModified('password')) {
         user.password = await bcrypt.hash(user.password, saltRounds)
     }
+    next()
+})
+
+userSchema.pre('validate', async function (next: Function) {
+    const user = this
+    user.username = user.email.slice(0, user.email.indexOf('@'))
     next()
 })
 const userModel = mongoose.model<IUser>('User', userSchema)
