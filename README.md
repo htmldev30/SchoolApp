@@ -12,6 +12,15 @@ Timeline for App Development
 
 ---
 
+** March. 4, 2023**
+
+- User association logic rewritten in TypeScript 
+- Error handling in TypeScript 
+- School registration and join codes setup 
+- Basic post schema and creation setup
+
+---
+
 **Feb. 28 to March. 3, 2023**
 
 - Rewrote backend in TypeScript. See "typescript" branch
