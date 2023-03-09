@@ -7,6 +7,7 @@ import userAuthRouter from './routes/userAuthRoutes'
 import facultyRouter from './routes/faculty/facultyRoutes'
 import userAssociationRouter from './routes/userAssociationRoutes'
 import postRouter from './routes/postRoutes'
+import userRouter from './routes/userRoutes'
 // Initializations
 const app: Application = express()
 app.use(cors())
@@ -21,6 +22,7 @@ db.once('open', () => {
 //#endregion
 
 app.use('/v1/auth', userAuthRouter)
+app.use('/v1/user', userRouter)
 app.use('/v1/userAssociation', userAssociationRouter)
 app.use('/v1/posts', postRouter)
 app.use('/v1/faculty', facultyRouter)

@@ -1,22 +1,34 @@
+require('dotenv').config()
 import { Request, Response } from 'express'
-import { Types } from 'mongoose'
 import postModel from '../../models/postSchema'
 import { getErrorMessage } from '../../utils/errorMessage'
 import { IPostReqBody } from '../../utils/postInterfaces'
+import { putFileInBucket } from '../../s3Client'
+import { getUUID } from '../../utils/randomValues'
+const postImageBucketName: any = process.env.AWS_POST_IMAGE_BUCKET_NAME
 
 export const createPost = async (req: Request, res: Response) => {
     try {
-        const { title, description, imageName }: IPostReqBody = req.body
+        const { title, description }: IPostReqBody = req.body
+        const file = req.file
+        const randomFileName: string = getUUID()
 
+        if (file) {
+            await putFileInBucket(
+                postImageBucketName,
+                randomFileName,
+                file.buffer,
+                file.mimetype,
+            )
+        }
         const post = new postModel({
             title: title,
             description: description,
-            imageName: imageName ? imageName : null,
+            imageName: randomFileName,
             creator: req.user.user_id,
         })
 
-        post.save()
-
+        await post.save()
         res.send('New Post Created')
     } catch (error) {
         res.status(500).send(getErrorMessage(error))

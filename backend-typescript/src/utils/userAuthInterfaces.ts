@@ -2,6 +2,7 @@ import { Types } from 'mongoose'
 
 export interface IUserRegistrationReqBody {
     accountType: 'parent' | 'student' | 'teacher'
+    grade?: 9 | 10 | 11 | 12 | null
     fullName: {
         firstName: string
         lastName: string
@@ -13,7 +14,7 @@ export interface IUserRegistrationReqBody {
 
 export interface IUserAuthRes {
     accountType: 'parent' | 'student' | 'teacher'
-    grade: number | null
+    grade?: 9 | 10 | 11 | 12 | any // TODO: i dont think its good to have type 'any' change later!
     fullName: {
         firstName: string
         lastName: string

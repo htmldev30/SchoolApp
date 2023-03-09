@@ -15,6 +15,7 @@ export const userRegistration = async (req: Request, res: Response) => {
     try {
         const {
             accountType,
+            grade,
             fullName,
             email,
             password,
@@ -38,6 +39,7 @@ export const userRegistration = async (req: Request, res: Response) => {
         }
         const user = new userModel({
             accountType: accountType,
+            grade: grade ? grade : null,
             fullName: {
                 firstName: fullName.firstName,
                 lastName: fullName.lastName,
@@ -57,7 +59,7 @@ export const userRegistration = async (req: Request, res: Response) => {
         await user.save() // await so field invalid errors get returned
         const userAuthRes: IUserAuthRes = {
             accountType: user.accountType,
-            grade: user.grade ? user.grade : null,
+            grade: user.grade,
             fullName: {
                 firstName: user.fullName.firstName,
                 lastName: user.fullName.lastName,
@@ -98,10 +100,10 @@ export const userLogin = async (req: Request, res: Response) => {
                 user_id: user._id,
             })
 
-            user.save()
+            await user.save()
             const userAuthRes: IUserAuthRes = {
                 accountType: user.accountType,
-                grade: user.grade ? user.grade : null,
+                grade: user.grade,
                 fullName: {
                     firstName: user.fullName.firstName,
                     lastName: user.fullName.lastName,

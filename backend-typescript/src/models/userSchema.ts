@@ -1,6 +1,7 @@
 import mongoose, { Schema, Types } from 'mongoose'
 
 import bcrypt from 'bcrypt'
+import { validateEmail } from '../utils/validators/userSchemaValidators'
 
 interface IUser {
     accountType: 'parent' | 'student' | 'teacher'
@@ -19,51 +20,69 @@ interface IUser {
 }
 
 const saltRounds = 10
-const userSchema = new mongoose.Schema<IUser>({
-    accountType: {
-        type: String,
-        enum: {
-            values: ['parent', 'student', 'teacher'],
-            message: 'Invalid Account Type',
-        },
-        required: true,
-    },
-    grade: { type: Number, required: false },
-    fullName: {
-        firstName: {
+const userSchema = new mongoose.Schema<IUser>(
+    {
+        accountType: {
             type: String,
+            enum: {
+                values: ['parent', 'student', 'teacher'],
+                message: 'Invalid Account Type',
+            },
             required: true,
         },
-        lastName: {
+        grade: {
+            type: Number,
+            enum: {
+                values: [9, 10, 11, 12],
+                message: 'Invalid Grade Level Input',
+            },
+            required: false,
+        },
+        fullName: {
+            firstName: {
+                type: String,
+                required: true,
+            },
+            lastName: {
+                type: String,
+                required: true,
+            },
+        },
+        username: { type: String, required: true, unique: true },
+        email: {
             type: String,
+            lowercase: true,
+            required: true,
+            unique: true,
+            validate: {
+                validator: validateEmail, // will automatically pass email to validEmail function
+                message: 'The email inputted in not a valid email.',
+            },
+        },
+        password: {
+            type: String,
+            minlength: [
+                8,
+                'Your password is too short! Make it at least 8 characters.',
+            ],
             required: true,
         },
+        jwtToken: {
+            type: String,
+        },
+        avatarName: {
+            default: '',
+            type: String,
+        },
+        associatedUsers: [],
+        school: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            ref: 'School',
+        },
     },
-    username: { type: String, required: true, unique: true },
-    email: {
-        type: String,
-        lowercase: true,
-        required: true,
-        unique: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    jwtToken: {
-        type: String,
-    },
-    avatarName: {
-        default: '',
-        type: String,
-    },
-    associatedUsers: [],
-    school: {
-        type: Schema.Types.ObjectId,
-        required: true,
-        ref: 'School',
-    },
-})
+    { timestamps: true },
+)
 
 userSchema.pre('save', async function (next: Function) {
     const user = this

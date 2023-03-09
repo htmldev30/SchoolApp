@@ -13,38 +13,41 @@ interface ISchool {
     joinCode: string
 }
 
-const schoolSchema = new mongoose.Schema<ISchool>({
-    name: {
-        type: String,
-        required: true,
+const schoolSchema = new mongoose.Schema<ISchool>(
+    {
+        name: {
+            type: String,
+            required: true,
+        },
+        address: {
+            street: {
+                type: String,
+                required: true,
+            },
+            city: {
+                type: String,
+                required: true,
+            },
+            zip: {
+                type: String,
+                required: true,
+            },
+            state: {
+                type: String,
+                required: true,
+            },
+            country: {
+                type: String,
+                required: true,
+            },
+        },
+        joinCode: {
+            type: String,
+            required: true,
+        },
     },
-    address: {
-        street: {
-            type: String,
-            required: true,
-        },
-        city: {
-            type: String,
-            required: true,
-        },
-        zip: {
-            type: String,
-            required: true,
-        },
-        state: {
-            type: String,
-            required: true,
-        },
-        country: {
-            type: String,
-            required: true,
-        },
-    },
-    joinCode: {
-        type: String,
-        required: true,
-    },
-})
+    { timestamps: true },
+)
 
 // using pre validate so we can set joinCode value as it is required
 schoolSchema.pre('validate', async function (next: Function) {
