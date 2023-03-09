@@ -2,7 +2,7 @@
   <img src="https://drive.google.com/uc?id=1RgHcsb1VSVuOc_kh9X05NzW27gz9LF0J" />
 </p>
 
-# EduConnect (Edit: name changed from, SchoolApp) (for FBLA competition)
+# EduConnect (for FBLA Competition)
 
 ### Mohammed Hit (Programmer) and Haylie Romero (UI Designer & Artist)
 
@@ -11,6 +11,7 @@ Info: I am satisfying the required functionalities for the app while adding my o
 Timeline for App Development
 
 ---
+
 
 **Feb. 28 to March. 3, 2023**
 
@@ -33,6 +34,8 @@ Timeline for App Development
 - User Association Context Additional Fixes 
 - User Profile Picture Fix With Initials
 - TODO: Fix user association context issue where associated users are updated automatically
+
+--- 
 
 **Feb. 21, 2023**
 

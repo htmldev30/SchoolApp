@@ -62,7 +62,6 @@ exports.requestAssociation = async (req, res) => {
                 'Only parent accounts may associate their student users.',
             )
         }
-
         if (recipient.accountType == 'parent') {
             throw new Error('Parents cannot associate with other parent users.')
         }
