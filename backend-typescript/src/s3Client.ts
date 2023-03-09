@@ -8,7 +8,7 @@ const {
 } = require('@aws-sdk/client-s3')
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner')
 
-// Code from Sam Meech-Ward | https://www.sammeechward.com/storing-images-in-s3-from-node-server
+// Code Adapted from Sam Meech-Ward | https://www.sammeechward.com/storing-images-in-s3-from-node-server
 const bucketRegion: any = process.env.AWS_BUCKET_REGION
 const accessKey: any = process.env.AWS_ACCESS_KEY
 const secretAccessKey: any = process.env.AWS_SECRET_ACCESS_KEY

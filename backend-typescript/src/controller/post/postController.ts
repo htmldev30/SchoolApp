@@ -2,7 +2,7 @@ require('dotenv').config()
 import { Request, Response } from 'express'
 import postModel from '../../models/postSchema'
 import { getErrorMessage } from '../../utils/errorMessage'
-import { IPostReqBody } from '../../utils/postInterfaces'
+import { IPostReqBody } from '../../utils/interfaces/postInterfaces'
 import { putFileInBucket } from '../../s3Client'
 import { getUUID } from '../../utils/randomValues'
 const postImageBucketName: any = process.env.AWS_POST_IMAGE_BUCKET_NAME
@@ -29,7 +29,7 @@ export const createPost = async (req: Request, res: Response) => {
         })
 
         await post.save()
-        res.send('New Post Created')
+        res.status(201).send('New Post Created')
     } catch (error) {
         res.status(500).send(getErrorMessage(error))
     }

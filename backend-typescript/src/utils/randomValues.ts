@@ -8,7 +8,7 @@ export const getRandomAlphaNumeric = (requestedLength: number): string => {
     for (let i = 0; i < requestedLength; i++) {
         generatedAlphaNumeric += allowedCharacters.charAt(
             Math.floor(Math.random() * allowedCharacters.length),
-        ) // pick a random character
+        ) // pick a random character requestedLength times
     }
     return generatedAlphaNumeric
 }

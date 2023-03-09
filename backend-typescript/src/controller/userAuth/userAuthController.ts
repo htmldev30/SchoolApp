@@ -7,7 +7,7 @@ import {
     IUserAuthRes,
     IUserRegistrationReqBody,
     IUserLoginReqBody,
-} from '../../utils/userAuthInterfaces'
+} from '../../utils/interfaces/userAuthInterfaces'
 import { jwtSign } from '../../utils/jwtSign'
 import schoolModel from '../../models/schoolSchema'
 
@@ -35,6 +35,21 @@ export const userRegistration = async (req: Request, res: Response) => {
         if (!school) {
             return res.status(404).send({
                 message: 'Could not find a school to associate with.',
+            })
+        }
+        if (accountType == 'student' && !grade) {
+            return res.status(404).send({
+                message: 'A student account must have a grade level.',
+            })
+        }
+        if (accountType == 'teacher' && grade) {
+            return res.status(404).send({
+                message: 'A teacher account cannot have a grade level.',
+            })
+        }
+        if (accountType == 'parent' && grade) {
+            return res.status(404).send({
+                message: 'A parent account cannot have a grade level.',
             })
         }
         const user = new userModel({

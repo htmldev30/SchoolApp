@@ -8,7 +8,7 @@ import {
     IActionOnAssociationRequest,
     IAssociationRequestUsersRes,
     IRequestAssociationReqBody,
-} from '../../utils/userAssociationInterfaces'
+} from '../../utils/interfaces/userAssociationInterfaces'
 
 export const getAssociationRequests = async (req: Request, res: Response) => {
     try {
