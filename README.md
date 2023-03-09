@@ -12,6 +12,13 @@ Timeline for App Development
 
 ---
 
+**March. 3, to March 8 2023**
+
+- Setup AWS for backend with TypeScript
+- User Association Schema and functionality rewritten in TypeScript
+- User Posts Schema and functionality rewritten in TypeScript
+
+---
 
 **Feb. 28 to March. 3, 2023**
 
