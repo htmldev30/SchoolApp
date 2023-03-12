@@ -1,17 +1,13 @@
-import 'react-native-gesture-handler' // As per documentation, goes at very top
-import React from 'react'
-// UI
-import { useFonts } from 'expo-font'
-import { NativeBaseProvider, extendTheme } from 'native-base'
+import 'react-native-gesture-handler'
 import { StatusBar } from 'expo-status-bar'
+import { NativeBaseProvider, extendTheme } from 'native-base'
+import { useFonts } from 'expo-font'
 
-// Contexts
+// Navigation
 import { UserAuthProvider } from './src/hooks/contexts/UserAuthProvider'
-// Customs
-import Index from './index'
-import { UserDynamicInfoProvider } from './src/hooks/contexts/UserDynamicInfoProvider'
+import { Index } from './src'
 
-export default function App() {
+const App: React.FC = () => {
     let [fontsLoaded] = useFonts({
         'Poppins-Regular': require('./assets/fonts/Poppins/Poppins-Regular.ttf'),
         'Poppins-Italic': require('./assets/fonts/Poppins/Poppins-Italic.ttf'),
@@ -34,7 +30,9 @@ export default function App() {
         'Lato-Black': require('./assets/fonts/Lato/Lato-Black.ttf'),
         'Lato-BlackItalic': require('./assets/fonts/Lato/Lato-BlackItalic.ttf'),
     })
-    const customColorTheme = {
+    // Theme
+
+    const customTheme = {
         fontConfig: {
             Poppins: {
                 400: {
@@ -139,19 +137,6 @@ export default function App() {
             800: '#B06969',
             900: '#934D4D',
         },
-        custom_mutedDark: {
-            DEFAULT: '#D4A373',
-            50: '#FFFFFF',
-            100: '#FAF5F0',
-            200: '#F1E1D1',
-            300: '#E7CCB1',
-            400: '#DEB892',
-            500: '#D4A373',
-            600: '#C78748',
-            700: '#A46B32',
-            800: '#794F25',
-            900: '#4E3318',
-        },
         custom_darkGray: {
             DEFAULT: '#43515C',
             50: '#9EADB8',
@@ -179,46 +164,42 @@ export default function App() {
             900: '#8F8F8F',
         },
     }
+
     const theme = extendTheme({
-        colors: customColorTheme,
+        colors: customTheme,
+        fontConfig: customTheme.fontConfig,
+        fonts: customTheme.fonts,
         components: {
             Heading: {
                 baseStyle: {
                     heading: 'Poppins',
-                    fontWeight: '600',
-                    color: customColorTheme.custom_darkGray[500],
+                    fontWeight: '700',
+                    color: customTheme.custom_darkGray[500],
                 },
             },
             Text: {
                 baseStyle: {
                     heading: 'Lato',
                     fontWeight: '700',
-                    color: customColorTheme.custom_primary[600],
-                },
-            },
-            Button: {
-                baseStyle: {
-                    borderColor: customColorTheme.custom_secondary[500],
-                    borderRadius: 12,
-                    height: 12,
+                    color: customTheme.custom_primary[600],
                 },
             },
             Input: {
                 baseStyle: {
-                    backgroundColor: customColorTheme.custom_white[500],
+                    backgroundColor: customTheme.custom_white[500],
                     borderRadius: 8,
                     height: 12,
-                    borderColor: customColorTheme.custom_secondary[300],
+                    borderColor: customTheme.custom_secondary[300],
                     _focus: {
-                        borderColor: customColorTheme.custom_secondary[600],
+                        borderColor: customTheme.custom_secondary[600],
                     },
                 },
             },
-            Icon: {
+            Button: {
                 baseStyle: {
-                    size: 5,
-                    ml: '2',
-                    color: customColorTheme.custom_muted[500],
+                    borderColor: customTheme.custom_secondary[500],
+                    borderRadius: 12,
+                    height: 12,
                 },
             },
         },
@@ -230,11 +211,10 @@ export default function App() {
     return (
         <NativeBaseProvider theme={theme}>
             <UserAuthProvider>
-                <UserDynamicInfoProvider>
-                    <StatusBar style="dark" />
-                    <Index />
-                </UserDynamicInfoProvider>
+                <Index />
             </UserAuthProvider>
         </NativeBaseProvider>
     )
 }
+
+export default App

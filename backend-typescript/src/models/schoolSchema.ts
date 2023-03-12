@@ -52,7 +52,7 @@ const schoolSchema = new mongoose.Schema<ISchool>(
 // using pre validate so we can set joinCode value as it is required
 schoolSchema.pre('validate', async function (next: Function) {
     const school = this
-    school.joinCode = getRandomAlphaNumeric(7)
+    school.joinCode = getRandomAlphaNumeric(7).toUpperCase()
     next()
 })
 

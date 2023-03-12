@@ -94,16 +94,15 @@ export const userRegistration = async (req: Request, res: Response) => {
 
 export const userLogin = async (req: Request, res: Response) => {
     try {
-        const { email, password }: IUserLoginReqBody = req.body
-        if (!(email && password)) {
+        const { username, password }: IUserLoginReqBody = req.body
+        if (!(username && password)) {
             throw new Error('Please input both fields.')
         }
-        // Find existing user via email
-        const lowerCasedEmail: string = email.toLowerCase()
-        const user = await userModel.findOne({ email: lowerCasedEmail })
+        // Find existing user via username
+        const user = await userModel.findOne({ username: username })
         if (!user) {
             throw new Error(
-                'A user associated with this email/password does not exist.',
+                'A user associated with this username/password does not exist.',
             )
         }
 
@@ -140,10 +139,9 @@ export const userLogin = async (req: Request, res: Response) => {
 }
 
 // Req type is CustomRequest because it includes the jwt payload
-export const protectedTestRoute = async (req: Request, res: Response) => {
+export const userLogout = async (req: Request, res: Response) => {
     try {
-        //res.send(req.user)
-        res.send(req.user)
+        res.status(200).send('Sign out successful.')
     } catch (error) {
         res.status(500).send(getErrorMessage(error))
     }

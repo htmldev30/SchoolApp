@@ -29,6 +29,6 @@ app.use('/v1/faculty', facultyRouter)
 
 const PORT: any = process.env.PORT
 const SERVER: any = process.env.SERVER
-app.listen(PORT, () => {
-    console.log(`Server is listening on 127.0.0.1:${process.env.PORT}`)
+app.listen(PORT, SERVER, () => {
+    console.log(`Server is listening on ${SERVER}:${PORT}`)
 })

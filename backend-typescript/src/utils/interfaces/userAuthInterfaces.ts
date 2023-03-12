@@ -28,6 +28,6 @@ export interface IUserAuthRes {
 }
 
 export interface IUserLoginReqBody {
-    email: string
+    username: string
     password: string
 }
